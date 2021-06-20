@@ -1,0 +1,35 @@
+{
+  "name": "inline-directory-bot",
+  "description": "Inline directory bot. Create your fork now",
+  "keywords": ["telegram", "inline", "directory", "bot", "open", "source"],
+  "logo": "https://cfc-sa.org.au/wp-content/uploads/2020/04/directory.png",
+  "website": "https://github.com/m4mallu/inline-directory-bot",
+  "repository": "https://github.com/m4mallu/inline-directory-bot",
+  "env": {
+        "APP_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
+        "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
+        "TG_BOT_TOKEN": {"description": "Get Bot Token From @BotFather Bot", "required": true},
+        "DEFAULT_CHAT_ROOM": {"description": "Group / channel Id: Members to which inline query answered", "required": true},
+        "ADMIN_USERS": {"description":  "List of admin user ids for special functions separated by space", "required":  true},
+        "ENV": {"description": "Set this to ANYTHING","value": "ANYTHING"}
+  },
+  "addons": [
+    {
+    "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
