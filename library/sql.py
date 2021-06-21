@@ -8,9 +8,7 @@
 import os
 import csv
 import codecs
-import asyncio
 import threading
-from pyrogram.errors import FloodWait
 from sqlalchemy import create_engine, func
 from sqlalchemy import Column, Numeric, TEXT
 from sqlalchemy.ext.declarative import declarative_base
@@ -72,8 +70,6 @@ async def query_msg(string):
     try:
         query = SESSION.query(Directory).filter(func.lower(Directory.name).contains(func.lower(string)))
         return query
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
     finally:
         SESSION.close()
 
@@ -138,7 +134,8 @@ async def load_db(file_name):
                                                                  'dept': record.dept,
                                                                  'mobile': record.mobile,
                                                                  'extension': record.extension,
-                                                                 'mail': record.mail
+                                                                 'mail': record.mail,
+                                                                 'thumb_url': record.thumb_url
                                                                  })
                     else:
                         SESSION.add(record)

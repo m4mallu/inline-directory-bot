@@ -14,6 +14,7 @@ from presets import Presets
 from telegraph import upload_file
 from pyrogram.types import Message
 from pyrogram import Client, filters
+from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from library.buttons import reply_markup_help
@@ -95,7 +96,7 @@ async def add_thumb(b, m: Message):
         await msg.delete()
         return
     #
-    if (" " in m.text) and m.reply_to_message.photo:
+    if (" " in m.text) and (m.reply_to_message is not None) and m.reply_to_message.photo:
         try:
             emp = str(m.text).split(" ")[1]
         except Exception:
@@ -238,6 +239,8 @@ async def extension_update(bot, m: Message):
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
                                                   user_id=id
                                                   )
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
     except Exception:
         msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
         await m.delete()

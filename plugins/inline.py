@@ -4,11 +4,12 @@
 #  Repo     : https://github.com/m4mallu/inine-directory-bot
 #  Author   : Renjith Mangal [ https://t.me/space4renjith ]
 #  Licence  : GPL-3
-
+import asyncio
 import os
 from pyrogram import Client
 from presets import Presets
 from library.sql import query_msg
+from pyrogram.errors import FloodWait
 from library.support import get_thumbnail, get_reply_markup
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, InlineQuery
 
@@ -28,13 +29,19 @@ async def answer(bot, query: InlineQuery):
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
                                                   user_id=id
                                                   )
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
     except Exception:
         return
     #
     results = []
+    search = []
     string = query.query.strip()
-    msg = await query_msg(string)
-    for file in msg:
+    try:
+        search = await query_msg(string)
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
+    for file in search:
         try:
             results.append(
                 InlineQueryResultArticle(
