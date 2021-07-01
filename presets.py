@@ -9,39 +9,34 @@
 class Presets(object):
     RESULTS = """
 𝙃𝙚𝙧𝙚 𝙞𝙨 𝙩𝙝𝙚 𝙧𝙚𝙨𝙪𝙡𝙩𝙨:           ⏺ /start ⏺
-\xad                                                                       \xad
-𝐍𝐚𝐦𝐞  👉 <b>{}</b>
-𝐃𝐞𝐩𝐭    👉 {}
-𝐌𝐨𝐛𝐢𝐥𝐞👉 {}
-𝐄𝐱𝐭.     👉 {}
-𝐄𝐦𝐚𝐢𝐥  👉 <code>{}</code>
-𝐄𝐌𝐏   👉 {}
+\xad                                                                               \xad
+𝐍𝐚𝐦𝐞  - <b>{}</b>
+𝐃𝐞𝐩𝐭    - {}
+𝐌𝐨𝐛𝐢𝐥𝐞- {}
+𝐄𝐱𝐭.     - {}
+𝐄𝐦𝐚𝐢𝐥  - <code>{}</code>
+𝐄𝐌𝐏   - {}
     """
     HELP_TXT = """
-𝙏𝙝𝙞𝙨 𝙗𝙤𝙩 𝙞𝙨 𝙢𝙖𝙙𝙚 𝙬𝙞𝙩𝙝:
-- 𝘗𝘺𝘵𝘩𝘰𝘯 3
-- 𝘚𝘲𝘭𝘈𝘭𝘤𝘩𝘦𝘮𝘺 𝘖𝘙𝘔 
-- 𝘗𝘺𝘳𝘰𝘨𝘳𝘢𝘮 𝘛𝘦𝘭𝘦𝘨𝘳𝘢𝘮 𝘔𝘛𝘗𝘳𝘰𝘵𝘰 𝘈𝘗𝘐
-  𝘍𝘳𝘢𝘮𝘦𝘸𝘰𝘳𝘬
+░▒▓ <b>Procedure:</b>
+          <code>1. Tap the button 'Search Here'
+    2. Search for the names.
+    3. Wait for some seconds.
+    4. Tap the required result.
+    5. Result will be in messages.</code>
 
-░▒▓ 𝘚𝘦𝘢𝘳𝘤𝘩 𝘪𝘯𝘭𝘪𝘯𝘦 𝘵𝘰 𝘨𝘦𝘵 𝘵𝘩𝘦 𝘤𝘰𝘯𝘵𝘢𝘤𝘵 𝘰𝘧
-    𝘴𝘵𝘢𝘧𝘧 𝘮𝘦𝘮𝘣𝘦𝘳.
-
-░▒▓ 𝘐𝘯𝘭𝘪𝘯𝘦 𝘴𝘦𝘢𝘳𝘤𝘩 𝘳𝘦𝘴𝘶𝘭𝘵𝘴 𝘢𝘳𝘦 𝘭𝘪𝘮𝘪𝘵𝘦𝘥 𝘵𝘰 𝘵𝘩𝘦 
-    𝘮𝘢𝘪𝘯 𝘨𝘳𝘰𝘶𝘱 𝘮𝘦𝘮𝘣𝘦𝘳𝘴 𝘤𝘪𝘳𝘤𝘭𝘦. 𝘕𝘰 𝘰𝘯𝘦 𝘤𝘢𝘯
-    𝘢𝘤𝘤𝘦𝘴𝘴 𝘵𝘩𝘦 𝘴𝘢𝘮𝘦, 𝘰𝘶𝘵𝘴𝘪𝘥𝘦 𝘵𝘩𝘦 𝘤𝘪𝘳𝘤𝘭𝘦. 
+░▒▓ <b>Advantages:</b>
+          <code>1. Search inline in any chat.
+    2. Admin user support.
+    3. Admins can change the data.
+    4. Mass delete / upload options.
+    5. Collectively independent DB.</code>
     
-░▒▓ 𝘜𝘴𝘦𝘳𝘴 𝘤𝘢𝘯 𝘶𝘱𝘥𝘢𝘵𝘦 𝘵𝘩𝘦𝘪𝘳 𝘦𝘹𝘵𝘦𝘯𝘴𝘪𝘰𝘯
-    𝘯𝘶𝘮𝘣𝘦𝘳 𝘣𝘺 𝘳𝘶𝘯𝘯𝘪𝘯𝘨 𝘵𝘩𝘦 𝘤𝘰𝘮𝘮𝘢𝘯𝘥.
+░▒▓ <a href='https://telegra.ph/How-to-update-contact-details-07-01'>𝙐𝙥𝙙𝙖𝙩𝙞𝙣𝙜 𝙩𝙝𝙚 𝙘𝙤𝙣𝙩𝙖𝙘𝙩 𝙙𝙚𝙩𝙖𝙞𝙡𝙨</a>
+ 
+░▒▓ <a href='https://telegra.ph/inline-directory-bot-help-06-19'>𝙋𝙧𝙤𝙟𝙚𝙘𝙩 𝙙𝙤𝙘𝙪𝙢𝙚𝙣𝙩𝙖𝙞𝙤𝙣</a>
     
-    <code>/update emp_number extension</code>
-    
-    𝘌𝘨: <code>/update 254 04842723555</code>
-    
-░▒▓ 𝘋𝘰𝘤𝘶𝘮𝘦𝘯𝘵𝘢𝘵𝘪𝘰𝘯 𝘰𝘧 𝘵𝘩𝘪𝘴 𝘣𝘰𝘵 𝘤𝘢𝘯 𝘣𝘦 𝘴𝘦𝘦𝘯
-    <a href='https://telegra.ph/inline-directory-bot-help-06-19'>𝙃𝙀𝙍𝙀</a>
-    
-░▒▓ 𝘍𝘰𝘳 𝘢𝘯𝘺 𝘲𝘶𝘦𝘳𝘪𝘦𝘴, 𝘤𝘰𝘯𝘵𝘢𝘤𝘵 𝘴𝘶𝘱𝘱𝘰𝘳𝘵.
+░▒▓ <i>For any queries, contact SUPPORT</i>
     """
     SUPPORT_TXT = """
 𝙁𝙤𝙧 :
@@ -58,14 +53,14 @@ class Presets(object):
     NO_RESULT_TXT = "❌ 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬:"
     NO_RESULT_TXT_STR = "😥 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐟𝐨𝐫 👉 {}"
     RESULT_TXT = "👀 𝐑𝐞𝐬𝐮𝐥𝐭𝐬:"
-    DL_WAIT_MSG = "𝘋𝘰𝘸𝘯𝘭𝘰𝘢𝘥𝘪𝘯𝘨 ... 𝘱𝘭𝘻 𝘸𝘢𝘪𝘵"
-    WAIT_MSG = "𝘗𝘭𝘦𝘢𝘴𝘦 𝘸𝘢𝘪𝘵.. 𝘢 𝘴𝘦𝘤𝘰𝘯𝘥 "
-    MASS_DEL_CNF = "𝘋𝘦𝘭𝘦𝘵𝘦𝘥 𝘵𝘩𝘦 𝘨𝘪𝘷𝘦𝘯 𝘳𝘦𝘤𝘰𝘳𝘥𝘴 𝘪𝘧 𝘦𝘹𝘪𝘴𝘵𝘴 ✅"
-    MASS_DEL_ERROR = "𝘗𝘭𝘦𝘢𝘴𝘦 𝘨𝘪𝘷𝘦 𝘵𝘩𝘦 𝘷𝘢𝘭𝘶𝘦𝘴 𝘴𝘦𝘱𝘢𝘳𝘢𝘵𝘦𝘥\n𝘣𝘺 <𝘴𝘱𝘢𝘤𝘦> 𝘧𝘰𝘭𝘭𝘰𝘸𝘦𝘥 𝘣𝘺 𝘵𝘩𝘦 𝘤𝘰𝘮𝘮𝘢𝘯𝘥"
-    NO_USER_MSG = "𝙀𝙧𝙧𝙤𝙧:\n\n𝘜𝘴𝘦𝘳 𝘯𝘰𝘵 𝘧𝘰𝘯𝘥 𝘪𝘯 𝘥𝘢𝘵𝘢𝘣𝘢𝘴𝘦"
+    DL_WAIT_MSG = "𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 .. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙒𝙖𝙞𝙩"
+    WAIT_MSG = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩 .. 𝙖 𝙨𝙚𝙘𝙤𝙣𝙙 !"
+    MASS_DEL_CNF = "𝘿𝙚𝙡𝙚𝙩𝙚𝙙 𝙩𝙝𝙚 𝙜𝙞𝙫𝙚𝙣 𝙧𝙚𝙘𝙤𝙧𝙙, 𝙞𝙛 𝙚𝙭𝙞𝙨𝙩 ! ✅"
+    MASS_DEL_ERROR = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙜𝙞𝙫𝙚 𝙩𝙝𝙚 𝙫𝙖𝙡𝙪𝙚𝙨 𝙨𝙚𝙥𝙖𝙧𝙖𝙩𝙚𝙙\n𝙗𝙮 𝙎𝙋𝘼𝘾𝙀 𝙛𝙤𝙡𝙡𝙤𝙬𝙚𝙙 𝙗𝙮 𝙩𝙝𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙 !"
+    NO_USER_MSG = "𝙀𝙧𝙧𝙤𝙧:\n\n𝙐𝙨𝙚𝙧 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙 𝙞𝙣 𝙙𝙖𝙩𝙗𝙖𝙨𝙚 !"
     CSV_LOAD_CNF = "𝐕𝐚𝐥𝐮𝐞𝐬 𝐢𝐧 <code>{}</code>\n𝐒𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 𝐥𝐨𝐚𝐝𝐞𝐝 𝐭𝐨 𝐃𝐁 ✅"
-    CSV_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n𝘊𝘩𝘦𝘤𝘬 𝘵𝘩𝘦 👉 <code>{}</code>\n𝘛𝘳𝘺 𝘢𝘨𝘢𝘪𝘯 𝘭𝘢𝘵𝘦𝘳"
-    URL_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n𝑆𝑜𝑚𝑒𝑡ℎ𝑖𝑛𝑔 𝑤𝑒𝑛𝑡 𝑤𝑟𝑜𝑛𝑔\n𝑇𝑟𝑦 𝑤𝑖𝑡ℎ 𝑑𝑖𝑓𝑓𝑒𝑟𝑒𝑛𝑡 𝑓𝑖𝑙𝑒 𝑙𝑎𝑡𝑒𝑟"
+    CSV_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n𝐂𝐡𝐞𝐜𝐤 𝐭𝐡𝐞 👉 <code>{}</code>\n𝐭𝐫𝐲 𝐚𝐠𝐚𝐢𝐧 𝐥𝐚𝐭𝐞𝐫..!"
+    URL_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n𝐒𝐨𝐦𝐞𝐭𝐡𝐢𝐧𝐠 𝐰𝐞𝐧𝐭 𝐰𝐫𝐨𝐧𝐠\n𝐓𝐫𝐲 𝐰𝐢𝐭𝐡 𝐝𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐭 𝐟𝐢𝐥𝐞 !"
     NOT_AUTH_TEXT = "𝙀𝙧𝙧𝙤𝙧:\n\n𝐘𝐨𝐮 𝐚𝐫𝐞 𝐧𝐨𝐭 𝐚𝐮𝐭𝐡𝐨𝐫𝐢𝐳𝐞𝐝 𝐩𝐞𝐫𝐟𝐨𝐫𝐦\n𝐭𝐡𝐢𝐬 𝐟𝐮𝐧𝐜𝐭𝐢𝐨𝐧.𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐬𝐮𝐩𝐩𝐨𝐫𝐭 ⚠️"
     USER_ADDED_MSG = "𝙐𝙨𝙚𝙧 𝙖𝙙𝙙𝙚𝙙 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮 ✅"
     USER_UPDATED_MSG = "𝙐𝙨𝙚𝙧 𝙚𝙭𝙞𝙨𝙩𝙨: 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
@@ -80,3 +75,7 @@ class Presets(object):
     INVALID_IMG = "𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐬𝐡𝐨𝐮𝐥𝐝 𝐫𝐞𝐩𝐥𝐚𝐲 𝐭𝐨 𝐚𝐧𝐲 𝐩𝐡𝐨𝐭𝐨 𝐮𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐢𝐧 𝐭𝐞𝐥𝐞𝐠𝐫𝐚𝐦"
     IMG_UPLOAD_CNF = "𝘾𝙤𝙣𝙜𝙧𝙖𝙩𝙨 :\n\n𝘐𝘮𝘢𝘨𝘦 𝘶𝘱𝘥𝘢𝘵𝘦𝘥 𝘴𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘪𝘯 𝘥𝘢𝘵𝘢𝘣𝘢𝘴𝘦 𝘧𝘰𝘳 𝘦𝘮𝘱: <b>{}</b>\n\n" \
                      "𝐎𝐩𝐞𝐧 <a href='{}'>𝐡𝐞𝐫𝐞</a>:\n\n𝐂𝐨𝐩𝐲 𝐡𝐞𝐫𝐞: <code>{}</code>"
+    UPDATE_MOBILE_TXT = "𝐌𝐨𝐛𝐢𝐥𝐞 𝐧𝐮𝐦𝐛𝐞𝐫 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲"
+    LIMIT_MOBILE = "𝐌𝐚𝐱𝐢𝐦𝐮𝐦 𝐓𝐰𝐨 𝐌𝐨𝐛𝐢𝐥𝐞 𝐧𝐮𝐦𝐛𝐞𝐫𝐬 𝐚𝐫𝐞\n𝐚𝐥𝐥𝐨𝐰𝐞𝐝, 𝐚𝐧𝐝 𝐬𝐡𝐨𝐮𝐥𝐝 𝐜𝐨𝐧𝐭𝐚𝐢𝐧 𝐢𝐧𝐭𝐞𝐠𝐞𝐫𝐬 "
+    UPDATE_EMAIL = "𝐄-𝐌𝐚𝐢𝐥 𝐈𝐝 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
+    UPDATE_EMAIL_ERROR = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n<b>Format Should be</b>\n\n<code>/email 251 sample@gmail.com</code>"

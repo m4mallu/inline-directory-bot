@@ -19,7 +19,15 @@ from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from library.buttons import reply_markup_help
 from library.support import get_reply_markup
-from library.sql import query_emp, add_user, update_user, update_thumb, load_db, mass_delete, update_extension
+from library.sql import (query_emp,
+                         add_user,
+                         update_user,
+                         update_thumb,
+                         load_db,
+                         mass_delete,
+                         update_extension,
+                         update_mobile_num,
+                         update_email)
 
 
 if bool(os.environ.get("ENV", False)):
@@ -105,9 +113,8 @@ async def add_thumb(b, m: Message):
             await asyncio.sleep(5)
             await msg.delete()
             return
-        try:
-            status = await query_emp(emp)
-        except Exception:
+        status = await query_emp(emp)
+        if bool(status) == bool(0):
             await msg.edit_text(Presets.NO_USER_MSG)
             await m.delete()
             await asyncio.sleep(5)
@@ -232,7 +239,9 @@ async def mass_delete_emp(b, m: Message):
         await asyncio.sleep(5)
         await msg.delete()
 
-@Client.on_message(filters.private & filters.command('update'))
+
+# -------------------------------- Update Extension number -------------------------- #
+@Client.on_message(filters.private & filters.command('extension'))
 async def extension_update(bot, m: Message):
     id = m.from_user.id
     try:
@@ -249,7 +258,7 @@ async def extension_update(bot, m: Message):
         return
     cmd_count = len(m.text.split(" ")[1:])
     msg = await m.reply_text(Presets.WAIT_MSG)
-    if (cmd_count in range(1, 3)) != bool(0) and str(m.text.split(" ")[2]).isdigit():
+    if (cmd_count in range(1, 3)) != bool(0) and str(m.text.split(" ")[1]).isdigit():
         emp = m.text.split(" ")[1]
         ext = m.text.split(" ")[2]
         try:
@@ -267,5 +276,99 @@ async def extension_update(bot, m: Message):
     else:
         await m.delete()
         await msg.edit_text(Presets.UPDATE_EXT_FORMAT_ERROR)
+        await asyncio.sleep(5)
+        await msg.delete()
+
+
+# --------------------------------- Update Mobile Number -------------------------------- #
+@Client.on_message(filters.private & filters.command('mobile'))
+async def update_mobile(bot, m: Message):
+    id = m.from_user.id
+    emp = m1 = m2 = int()
+    mobile_numbers = str()
+    try:
+        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
+                                                  user_id=id
+                                                  )
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
+    except Exception:
+        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        await m.delete()
+        await asyncio.sleep(5)
+        await msg.delete()
+        return
+    cmd_count = len(m.text.split(" ")[1:])
+    msg = await m.reply_text(Presets.WAIT_MSG)
+    if (cmd_count in range(1, 4)) != bool(0) and str(m.text.split(" ")[1]).isdigit():
+        try:
+            emp = m.text.split(" ")[1]
+            m1 = m.text.split(" ")[2]
+            m2 = m.text.split(" ")[3]
+        except Exception:
+            pass
+        status = await query_emp(emp)
+        if bool(status) == bool(0):
+            await msg.edit_text(Presets.NO_USER_MSG)
+            await m.delete()
+            await asyncio.sleep(5)
+            await msg.delete()
+            return
+        if bool(m1 and m2):
+            mobile_numbers = str(m1) + " " + "|" + " " + str(m2)
+        else:
+            mobile_numbers = str(m1)
+        await update_mobile_num(emp, mobile_numbers)
+        await m.delete()
+        await msg.edit_text(Presets.UPDATE_MOBILE_TXT)
+        await asyncio.sleep(5)
+        await msg.delete()
+    else:
+        await m.delete()
+        await msg.edit_text(Presets.LIMIT_MOBILE)
+        await asyncio.sleep(5)
+        await msg.delete()
+
+
+# -------------------------------- Update E-Mail address -------------------------- #
+@Client.on_message(filters.private & filters.command('email'))
+async def update_email_id(bot, m: Message):
+    id = m.from_user.id
+    emp = email = str()
+    try:
+        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
+                                                  user_id=id
+                                                  )
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
+    except Exception:
+        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        await m.delete()
+        await asyncio.sleep(5)
+        await msg.delete()
+        return
+    cmd_count = len(m.text.split(" ")[1:])
+    msg = await m.reply_text(Presets.WAIT_MSG)
+    if (cmd_count in range(1, 3)) and str(m.text.split(" ")[1]).isdigit():
+        try:
+            emp = m.text.split(" ")[1]
+            email = m.text.split(" ")[2]
+        except Exception:
+            pass
+        status = await query_emp(emp)
+        if bool(status) == bool(0):
+            await msg.edit_text(Presets.NO_USER_MSG)
+            await m.delete()
+            await asyncio.sleep(5)
+            await msg.delete()
+            return
+        await update_email(emp, email)
+        await m.delete()
+        await msg.edit_text(Presets.UPDATE_EMAIL)
+        await asyncio.sleep(5)
+        await msg.delete()
+    else:
+        await m.delete()
+        await msg.edit_text(Presets.UPDATE_EMAIL_ERROR)
         await asyncio.sleep(5)
         await msg.delete()

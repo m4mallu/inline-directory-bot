@@ -24,8 +24,11 @@ else:
 @Client.on_inline_query()
 async def answer(bot, query: InlineQuery):
     id = query.from_user.id
-    me = await Client.get_me(bot)
+    me = []
+    results = []
+    search = []
     try:
+        me = await Client.get_me(bot)
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
                                                   user_id=id
                                                   )
@@ -34,8 +37,6 @@ async def answer(bot, query: InlineQuery):
     except Exception:
         return
     #
-    results = []
-    search = []
     string = query.query.strip()
     try:
         search = await query_msg(string)

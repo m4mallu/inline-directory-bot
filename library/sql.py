@@ -38,7 +38,7 @@ class Directory(BASE):
     # Seven columns with employ code as the primary key
     name = Column(TEXT)
     dept = Column(TEXT)
-    mobile = Column(Numeric)
+    mobile = Column(TEXT)
     extension = Column(Numeric)
     mail = Column(TEXT)
     emp = Column(Numeric, primary_key=True)
@@ -94,8 +94,7 @@ async def update_user(name, dept, mobile, extension, mail, emp):
                                                                           'dept': dept,
                                                                           'mobile': mobile,
                                                                           'extension': extension,
-                                                                          'mail': mail,
-                                                                          'emp': emp})
+                                                                          'mail': mail})
         finally:
             SESSION.commit()
 
@@ -134,8 +133,7 @@ async def load_db(file_name):
                                                                  'dept': record.dept,
                                                                  'mobile': record.mobile,
                                                                  'extension': record.extension,
-                                                                 'mail': record.mail,
-                                                                 'thumb_url': record.thumb_url
+                                                                 'mail': record.mail
                                                                  })
                     else:
                         SESSION.add(record)
@@ -149,16 +147,17 @@ async def load_db(file_name):
 
 # -------------------------------- mass delete contacts -------------------------------- #
 async def mass_delete(emp_list):
-    for i in emp_list:
-        record = SESSION.query(Directory).filter(Directory.emp == i)
-        if record:
-            try:
-                SESSION.query(Directory).filter(Directory.emp == i).delete()
-                SESSION.commit()
-            except Exception:
+    with INSERTION_LOCK:
+        for i in emp_list:
+            record = SESSION.query(Directory).filter(Directory.emp == i)
+            if record:
+                try:
+                    SESSION.query(Directory).filter(Directory.emp == i).delete()
+                    SESSION.commit()
+                except Exception:
+                    pass
+            else:
                 pass
-        else:
-            pass
 
 
 # ------------------------- update extension number ---------------------------- #
@@ -171,3 +170,21 @@ async def update_extension(emp, value):
             SESSION.commit()
     else:
         raise Exception
+
+
+# ------------------------- update mobile number ---------------------------- #
+async def update_mobile_num(emp, value):
+    with INSERTION_LOCK:
+        try:
+            SESSION.query(Directory).filter(Directory.emp == emp).update({'mobile': value})
+        finally:
+            SESSION.commit()
+
+
+# ------------------------- update email id ---------------------------- #
+async def update_email(emp, value):
+    with INSERTION_LOCK:
+        try:
+            SESSION.query(Directory).filter(Directory.emp == emp).update({'mail': value})
+        finally:
+            SESSION.commit()
