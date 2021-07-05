@@ -64,7 +64,7 @@ async def user_update(b, m: Message):
         await msg.delete()
         return
     #
-    name = str(m.text).split(" ")[1]
+    name = str(m.text).split(" ")[1].replace("-", " ")
     dept = str(m.text).split(" ")[2]
     mobile = str(m.text).split(" ")[3]
     extension = str(m.text).split(" ")[4]
