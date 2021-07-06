@@ -4,44 +4,26 @@
 #  Repo     : https://github.com/m4mallu/inine-directory-bot
 #  Author   : Renjith Mangal [ https://t.me/space4renjith ]
 #  Licence  : GPL-3
+
 import asyncio
-import os
 from pyrogram import Client
 from presets import Presets
 from library.sql import query_msg
-from pyrogram.errors import FloodWait
-from library.support import get_thumbnail, get_reply_markup
+from library.support import chat_member, user_name
+from library.support import get_thumbnail, get_reply_markup, query_chat_participant
 from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, InlineQuery
-
-
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-else:
-    from config import Config
 
 
 # -------------------------- Answering Inline query --------------------------------- #
 @Client.on_inline_query()
 async def answer(bot, query: InlineQuery):
     id = query.from_user.id
-    me = []
     results = []
-    search = []
-    try:
-        me = await Client.get_me(bot)
-        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
-                                                  user_id=id
-                                                  )
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
-    except Exception:
+    await query_chat_participant(id, bot)
+    if id not in chat_member:
         return
-    #
     string = query.query.strip()
-    try:
-        search = await query_msg(string)
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
+    search = await query_msg(string)
     for file in search:
         try:
             results.append(
@@ -56,7 +38,7 @@ async def answer(bot, query: InlineQuery):
                                                f'{file.emp}')
                                                ),
                     description=f'{file.dept}'.upper(),
-                    reply_markup=get_reply_markup(me.username),
+                    reply_markup=get_reply_markup(user_name[id]),
                     thumb_url=await get_thumbnail(file)
                 )
             )
@@ -86,3 +68,6 @@ async def answer(bot, query: InlineQuery):
             )
         except Exception:
             pass
+    #
+    await asyncio.sleep(5)
+    results.clear()

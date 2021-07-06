@@ -65,7 +65,7 @@ class Presets(object):
     USER_ADDED_MSG = "𝙐𝙨𝙚𝙧 𝙖𝙙𝙙𝙚𝙙 𝙨𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮 ✅"
     USER_UPDATED_MSG = "𝙐𝙨𝙚𝙧 𝙚𝙭𝙞𝙨𝙩𝙨: 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
     NO_CSV_MSG = "𝐒𝐞𝐧𝐝 𝐭𝐡𝐞 𝐜𝐨𝐦𝐦𝐚𝐧𝐝 𝐚𝐬 𝐚 𝐫𝐞𝐩𝐥𝐚𝐲 𝐭𝐨 𝐚\n𝐜𝐨𝐦𝐩𝐚𝐭𝐢𝐚𝐛𝐥𝐞 𝘾𝙎𝙑 𝐟𝐢𝐥𝐞"
-    SHARE_BUTTON_TEXT = "𝙃𝙞..  👋\n𝐂𝐡𝐞𝐜𝐤𝐨𝐮𝐭 : @{username}\n𝐅𝐨𝐫 𝐬𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠 𝐜𝐨𝐧𝐭𝐚𝐜𝐭𝐬"
+    SHARE_BUTTON_TEXT = "𝙃𝙞..  👋\n𝐂𝐡𝐞𝐜𝐤𝐨𝐮𝐭 : @{}\n𝐅𝐨𝐫 𝐬𝐞𝐚𝐫𝐜𝐡𝐢𝐧𝐠 𝐜𝐨𝐧𝐭𝐚𝐜𝐭𝐬"
     INVALID_FORMAT = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n𝐅𝐨𝐫𝐦𝐚𝐭 𝐬𝐡𝐨𝐮𝐥𝐝 𝐛𝐞:\n<code>name dept mobile Ext.No mail emp [𝑤𝑖𝑡ℎ 𝑠𝑝𝑎𝑐𝑒 𝑠𝑒𝑝𝑎𝑟𝑎𝑡𝑖𝑜𝑛]</code>"
     INVALID_CMD = "𝙀𝙧𝙧𝙤𝙧:\n\n𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐟𝐨𝐫𝐦𝐚𝐭 ⚠️\n<code>Sample: /add 255</code>"
     UPDATE_EXT_CNF = "𝐄𝐱𝐭𝐞𝐧𝐬𝐢𝐨𝐧 𝐧𝐮𝐦𝐛𝐞𝐫 𝐟𝐨𝐫 𝐞𝐦𝐩𝐥𝐨𝐲: <code>{}</code>\n𝐇𝐚𝐬 𝐛𝐞𝐞𝐧 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐭𝐨: <code>{}</code>  ✅\n\n" \
