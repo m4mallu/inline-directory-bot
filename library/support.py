@@ -73,6 +73,8 @@ async def admin_info(bot):
             await asyncio.sleep(e.x)
         except Exception:
             pass
-        link = '🔰' + ' ' + name.mention()
-        admins.append(link)
+        if name:
+            link = '🔰' + ' ' + name.mention()
+            admins.append(link)
+            name = str()
     return admins
