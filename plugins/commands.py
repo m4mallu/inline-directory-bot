@@ -18,7 +18,7 @@ from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from library.buttons import reply_markup_help
-from library.support import get_reply_markup
+from library.support import get_reply_markup, admin_info
 from library.sql import (query_emp,
                          add_user,
                          update_user,
@@ -372,3 +372,28 @@ async def update_email_id(bot, m: Message):
         await msg.edit_text(Presets.UPDATE_EMAIL_ERROR)
         await asyncio.sleep(5)
         await msg.delete()
+
+@Client.on_message(filters.private & filters.command('admins'))
+async def view_admins(bot, m: Message):
+    id = m.from_user.id
+    try:
+        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
+                                                  user_id=id
+                                                  )
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
+    except Exception:
+        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        await m.delete()
+        await asyncio.sleep(5)
+        await msg.delete()
+        return
+    results = await admin_info(bot)
+    message = '\n'.join(results)
+    await m.delete()
+    msg = await m.reply_text(Presets.ADMINS_INFO.format(message),
+                             parse_mode='html',
+                             disable_web_page_preview=True
+                             )
+    await asyncio.sleep(30)
+    await msg.delete()

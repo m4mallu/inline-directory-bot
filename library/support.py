@@ -62,3 +62,17 @@ async def query_chat_participant(id, bot):
         chat_member[id] = id
     else:
         pass
+
+async def admin_info(bot):
+    admins = []
+    name = str()
+    for names in Config.ADMIN_USERS:
+        try:
+            name = await bot.get_users(names)
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+        except Exception:
+            pass
+        link = '🔰' + ' ' + name.mention()
+        admins.append(link)
+    return admins
