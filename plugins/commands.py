@@ -17,8 +17,8 @@ from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
-from library.buttons import reply_markup_help
 from library.support import get_reply_markup, admin_info
+from library.buttons import reply_markup_help, replay_markup_close
 from library.sql import (query_emp,
                          add_user,
                          update_user,
@@ -373,9 +373,12 @@ async def update_email_id(bot, m: Message):
         await asyncio.sleep(5)
         await msg.delete()
 
+
+# -------------------------------- Get Admin List -------------------------- #
 @Client.on_message(filters.private & filters.command('admins'))
 async def view_admins(bot, m: Message):
     id = m.from_user.id
+    msg = await m.reply_text(Presets.WAIT_MSG)
     try:
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
                                                   user_id=id
@@ -383,7 +386,7 @@ async def view_admins(bot, m: Message):
     except FloodWait as e:
         await asyncio.sleep(e.x)
     except Exception:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        await msg.edit(Presets.NOT_AUTH_TEXT)
         await m.delete()
         await asyncio.sleep(5)
         await msg.delete()
@@ -391,9 +394,9 @@ async def view_admins(bot, m: Message):
     results = await admin_info(bot)
     message = '\n'.join(results)
     await m.delete()
-    msg = await m.reply_text(Presets.ADMINS_INFO.format(message),
-                             parse_mode='html',
-                             disable_web_page_preview=True
-                             )
-    await asyncio.sleep(30)
-    await msg.delete()
+    await msg.edit_text(Presets.ADMINS_INFO.format(message),
+                        parse_mode='html',
+                        disable_web_page_preview=True,
+                        reply_markup=replay_markup_close
+                        )
+

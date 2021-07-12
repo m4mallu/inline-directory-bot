@@ -27,5 +27,12 @@ back_button = [
     ]
 ]
 
+close_button = [
+    [
+        InlineKeyboardButton("Close", callback_data="close_btn")
+    ]
+]
+
+replay_markup_close = InlineKeyboardMarkup(close_button)
 reply_markup_back = InlineKeyboardMarkup(back_button)
 reply_markup_help = InlineKeyboardMarkup(help_button)

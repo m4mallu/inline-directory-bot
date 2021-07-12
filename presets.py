@@ -79,5 +79,5 @@ class Presets(object):
     UPDATE_MOBILE_TXT = "𝐌𝐨𝐛𝐢𝐥𝐞 𝐧𝐮𝐦𝐛𝐞𝐫 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲  ✅"
     LIMIT_MOBILE = "𝐌𝐚𝐱𝐢𝐦𝐮𝐦 𝐓𝐰𝐨 𝐌𝐨𝐛𝐢𝐥𝐞 𝐧𝐮𝐦𝐛𝐞𝐫𝐬 𝐚𝐫𝐞\n𝐚𝐥𝐥𝐨𝐰𝐞𝐝, 𝐚𝐧𝐝 𝐬𝐡𝐨𝐮𝐥𝐝 𝐜𝐨𝐧𝐭𝐚𝐢𝐧 𝐢𝐧𝐭𝐞𝐠𝐞𝐫𝐬 "
     UPDATE_EMAIL = "𝐄-𝐌𝐚𝐢𝐥 𝐈𝐝 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
-    ADMINS_INFO = "𝐅𝐨𝐥𝐥𝐨𝐰𝐢𝐧𝐠 𝐮𝐬𝐞𝐫𝐬 𝐚𝐫𝐞 𝐭𝐡𝐞 𝐀𝐝𝐦𝐢𝐧𝐬 𝐨𝐟 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭:\n\n{}"
+    ADMINS_INFO = "𝐀𝐝𝐦𝐢𝐧𝐬 𝐨𝐟 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭:\xad                             \xad\n\n{}"
     UPDATE_EMAIL_ERROR = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n<b>Format Should be</b>\n\n<code>/email 251 sample@gmail.com</code>"
