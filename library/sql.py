@@ -41,7 +41,7 @@ class Directory(BASE):
     name = Column(TEXT)
     dept = Column(TEXT)
     mobile = Column(TEXT)
-    extension = Column(Numeric)
+    extension = Column(TEXT)
     mail = Column(TEXT)
     emp = Column(Numeric, primary_key=True)
     thumb_url = Column(TEXT)
