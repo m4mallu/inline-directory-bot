@@ -43,6 +43,7 @@ def get_reply_markup(username):
 
 # ----------- Filtering chat participants for inline query answer ------------ #
 async def query_chat_participant(id, bot):
+    # Saving the bot username for further usage
     if id not in user_name:
         try:
             me = await bot.get_me()
@@ -51,7 +52,7 @@ async def query_chat_participant(id, bot):
             await asyncio.sleep(e.x)
     else:
         pass
-    #
+    # Checking the queried user is a member of the default chat room.
     if id not in chat_member:
         try:
             member = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=id)
@@ -78,3 +79,11 @@ async def admin_info(bot):
             admins.append(link)
             name = str()
     return admins
+
+
+async def map_chat_member(bot):
+    user_ids = []
+    async for users in bot.iter_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):
+        member = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=users.user.id)
+        user_ids.append(member.user.id)
+    return user_ids

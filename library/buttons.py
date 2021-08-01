@@ -11,12 +11,12 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 help_button = [
     [
-        InlineKeyboardButton("Help", callback_data="help_btn"),
-        InlineKeyboardButton("Source", url="https://github.com/m4mallu/inline-directory-bot")
+        InlineKeyboardButton("❓ Help", callback_data="help_btn"),
+        InlineKeyboardButton("♨️ Source", url="https://github.com/m4mallu/inline-directory-bot")
     ],
     [
-        InlineKeyboardButton("Support", callback_data="support_btn"),
-        InlineKeyboardButton("Search Here", switch_inline_query_current_chat='')
+        InlineKeyboardButton("👷🏿‍♂️ Support", callback_data="support_btn"),
+        InlineKeyboardButton("🔎  Search Here", switch_inline_query_current_chat='')
     ]
 ]
 

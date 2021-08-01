@@ -8,29 +8,29 @@
 
 class Presets(object):
     RESULTS = """
-𝙃𝙚𝙧𝙚 𝙞𝙨 𝙩𝙝𝙚 𝙧𝙚𝙨𝙪𝙡𝙩𝙨:           ⏺ /start ⏺
-\xad                                                                               \xad
 𝐍𝐚𝐦𝐞  - <b>{}</b>
 𝐃𝐞𝐩𝐭    - {}
 𝐌𝐨𝐛𝐢𝐥𝐞- {}
 𝐄𝐱𝐭.     - {}
 𝐄𝐦𝐚𝐢𝐥  - <code>{}</code>
 𝐄𝐌𝐏   - {}
+\xad                                                                               \xad
+<a href='t.me/{}?start={}'>🏠 <b>𝖧𝗈𝗆𝖾</b></a>
     """
     HELP_TXT = """
 ░▒▓ <b>Procedure:</b>
           <code>1. Tap the button 'Search Here'
-    2. Search for the names.
-    3. Wait for some seconds.
-    4. Tap the required result.
-    5. Result will be in messages.</code>
+    2. Search by the:
+            - Name.
+            - Phone Number.
+            - Department.
+    3. Tap the required result.</code>
 
 ░▒▓ <b>Advantages:</b>
           <code>1. Search inline in any chat.
-    2. Admin user support.
-    3. Admins can change the data.
-    4. Mass delete / upload options.
-    5. Collectively independent DB.</code>
+    2. Admins user support.
+    3. Mass delete / upload.
+    4. User can update data.</code>
     
 ░▒▓ <a href='https://telegra.ph/How-to-update-contact-details-07-01'>𝙐𝙥𝙙𝙖𝙩𝙞𝙣𝙜 𝙩𝙝𝙚 𝙘𝙤𝙣𝙩𝙖𝙘𝙩 𝙙𝙚𝙩𝙖𝙞𝙡𝙨</a>
  
@@ -48,13 +48,16 @@ class Presets(object):
 ░▒▓ <a href='https://telegra.ph/inline-directory-bot-help-06-19'>𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐚𝐭𝐢𝐨𝐧</a> ▓▒░ <a href='https://t.me/space4renjith'>𝙍𝙚𝙣𝙟𝙞𝙩𝙝 𝙍</a>
 
     """
-    WELCOME_TXT = "<code>Hello.. {}\n𝟏. 𝐒𝐞𝐚𝐫𝐜𝐡 𝐧𝐚𝐦𝐞 𝐭𝐨 𝐠𝐞𝐭 𝐝𝐞𝐭𝐚𝐢𝐥𝐬.\n𝟐. 𝐓𝐫𝐲 𝐇𝐞𝐥𝐩 𝐭𝐨 𝐤𝐧𝐨𝐰 𝐭𝐡𝐞 𝐮𝐬𝐚𝐠𝐞.</code>"
+    WELCOME_TXT = "<b>Hello.. {} 🙋🏻</b>\n<i>Tap '<strike>Search Here</strike>' to search inline. " \
+                  "Try '<strike>Help</strike>' to know, how to use this bot." \
+                  " If you have any difficulty to use this bot, please contact the support. To make a copy of mine, " \
+                  " please visit my <u>Github Source Repo</u>. Have a nice day 👏</i>"
     THUMBNAIL_URL = 'https://telegra.ph/file/06610b5b61f20d1dcb38a.png'
     NO_RESULT_TXT = "❌ 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬:"
     NO_RESULT_TXT_STR = "😥 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐟𝐨𝐫 👉 {}"
     RESULT_TXT = "👀 𝐑𝐞𝐬𝐮𝐥𝐭𝐬:"
     DL_WAIT_MSG = "𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 .. 𝙋𝙡𝙚𝙖𝙨𝙚 𝙒𝙖𝙞𝙩"
-    WAIT_MSG = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩 .. 𝙖 𝙨𝙚𝙘𝙤𝙣𝙙 !"
+    WAIT_MSG = "𝗣𝗿𝗼𝗰𝗲𝘀𝘀𝗶𝗻𝗴... 𝗣𝗹𝘇 𝘄𝗮𝗶𝘁 ⏱"
     MASS_DEL_CNF = "𝘿𝙚𝙡𝙚𝙩𝙚𝙙 𝙩𝙝𝙚 𝙜𝙞𝙫𝙚𝙣 𝙧𝙚𝙘𝙤𝙧𝙙, 𝙞𝙛 𝙚𝙭𝙞𝙨𝙩 ! ✅"
     MASS_DEL_ERROR = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙜𝙞𝙫𝙚 𝙩𝙝𝙚 𝙫𝙖𝙡𝙪𝙚𝙨 𝙨𝙚𝙥𝙖𝙧𝙖𝙩𝙚𝙙\n𝙗𝙮 𝙎𝙋𝘼𝘾𝙀 𝙛𝙤𝙡𝙡𝙤𝙬𝙚𝙙 𝙗𝙮 𝙩𝙝𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙 !"
     NO_USER_MSG = "𝙀𝙧𝙧𝙤𝙧:\n\n𝙐𝙨𝙚𝙧 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙 𝙞𝙣 𝙙𝙖𝙩𝙗𝙖𝙨𝙚 !"
@@ -81,3 +84,7 @@ class Presets(object):
     UPDATE_EMAIL = "𝐄-𝐌𝐚𝐢𝐥 𝐈𝐝 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅"
     ADMINS_INFO = "𝐀𝐝𝐦𝐢𝐧𝐬 𝐨𝐟 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭:\xad                             \xad\n\n{}"
     UPDATE_EMAIL_ERROR = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n<b>Format Should be</b>\n\n<code>/email 251 sample@gmail.com</code>"
+    BROADCAST_MSG = "𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐬𝐞𝐧𝐝 𝐬𝐮𝐜𝐜𝐞𝐬𝐬𝐟𝐮𝐥𝐥𝐲 ✅\n\xad                                   \xad\n<b>Passed- {}\nFailed- {}</b>"
+    BROADCAST_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n<i>This command should be used as a reply to any messaged or media. Just format a text" \
+                      " message or send a media to bot. Finally, send this command as reply to the above message to" \
+                      " broadcast it to the bot subscribers.</i>"

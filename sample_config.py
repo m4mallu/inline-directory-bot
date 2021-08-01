@@ -35,6 +35,8 @@ class Config(object):
     # List of admin user ids for special functions(Storing as an array)
     ADMIN_USERS = set(int(x) for x in os.environ.get("ADMIN_USERS", "").split())
 
+    # List of super admin user ids for broadcast(Storing as an array)
+    SUDO_USERS = set(int(x) for x in os.environ.get("SUDO_USERS", "").split())
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)

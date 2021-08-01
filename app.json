@@ -11,6 +11,7 @@
         "TG_BOT_TOKEN": {"description": "Get Bot Token From @BotFather Bot", "required": true},
         "DEFAULT_CHAT_ROOM": {"description": "Group / channel Id: Members to which inline query answered", "required": true},
         "ADMIN_USERS": {"description":  "List of admin user ids for special functions separated by space", "required":  true},
+        "SUDO_USERS": {"description":  "List of Super admin user ids for broadcast messages. separated by space", "required":  true},
         "ENV": {"description": "Set this to ANYTHING","value": "ANYTHING"}
   },
   "addons": [

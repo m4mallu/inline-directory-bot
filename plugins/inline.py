@@ -30,14 +30,16 @@ async def answer(bot, query: InlineQuery):
                 InlineQueryResultArticle(
                     title=file.name,
                     input_message_content=InputTextMessageContent(
-                        Presets.RESULTS.format(f'{file.name}',
-                                               f'{file.dept}'.upper(),
-                                               f'{file.mobile}',
-                                               f'{file.extension}',
-                                               f'{file.mail}',
-                                               f'{file.emp}')
+                        Presets.RESULTS.format(file.name,
+                                               file.dept.upper(),
+                                               file.mobile,
+                                               file.extension,
+                                               file.mail,
+                                               file.emp,
+                                               user_name[id],
+                                               'start',)
                                                ),
-                    description=f'{file.dept}'.upper(),
+                    description=file.dept.upper(),
                     reply_markup=get_reply_markup(user_name[id]),
                     thumb_url=await get_thumbnail(file)
                 )

@@ -17,7 +17,7 @@ from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
-from library.support import get_reply_markup, admin_info
+from library.support import get_reply_markup, admin_info, map_chat_member
 from library.buttons import reply_markup_help, replay_markup_close
 from library.sql import (query_emp,
                          add_user,
@@ -400,3 +400,38 @@ async def view_admins(bot, m: Message):
                         reply_markup=replay_markup_close
                         )
 
+@Client.on_message(filters.private & filters.command('send'))
+async def send_message_to_users(bot, m: Message):
+    msg = await m.reply_text(Presets.WAIT_MSG)
+    if m.from_user.id not in Config.SUDO_USERS:
+        await msg.edit_text(Presets.NOT_AUTH_TEXT)
+        await m.delete()
+        await asyncio.sleep(5)
+        await msg.delete()
+        return
+    fail_count = pass_count = int()
+    if (" " not in m.text) and ("send" in m.text) and (m.reply_to_message is not None):
+        await m.delete()
+        member = await map_chat_member(bot)
+        for chat_id in member:
+            try:
+                await bot.copy_message(
+                    chat_id=chat_id,
+                    from_chat_id=m.chat.id,
+                    message_id=m.reply_to_message.message_id,
+                    caption=m.caption
+                )
+                pass_count += 1
+            except FloodWait as e:
+                await asyncio.sleep(e.x)
+            except Exception:
+                fail_count += 1
+                pass
+        await msg.edit_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
+                            reply_markup=replay_markup_close
+                            )
+    else:
+        await m.delete()
+        await msg.edit_text(Presets.BROADCAST_ERROR,
+                            reply_markup=replay_markup_close
+                            )

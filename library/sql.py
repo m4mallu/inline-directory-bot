@@ -11,11 +11,9 @@ import codecs
 import asyncio
 import threading
 from pyrogram.errors import FloodWait
-from sqlalchemy import create_engine, func
-from sqlalchemy import Column, Numeric, TEXT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-
+from sqlalchemy import create_engine, Column, Numeric, TEXT, func
 
 if bool(os.environ.get("ENV", False)):
     from sample_config import Config
@@ -34,6 +32,7 @@ BASE = declarative_base()
 SESSION = start()
 
 INSERTION_LOCK = threading.RLock()
+
 
 class Directory(BASE):
     __tablename__ = "directory"
@@ -55,6 +54,7 @@ class Directory(BASE):
         self.emp = emp
         self.thumb_url = thumb_url
 
+
 Directory.__table__.create(checkfirst=True)
 
 
@@ -70,7 +70,17 @@ async def query_emp(emp):
 # ----------------------------------- query contact details --------------------------- #
 async def query_msg(string):
     try:
-        query = SESSION.query(Directory).filter(func.lower(Directory.name).contains(func.lower(string)))
+        # Typical indian mobile numbers will have a '0' before the same. Change the code w.r.t the zone.
+        if str(string).isdigit():
+            if not str(string).startswith('0'):
+                string = '0' + str(string)
+            query = SESSION.query(Directory).filter(Directory.mobile.contains(string))
+        else:
+            query = SESSION.query(Directory).filter(func.lower(
+                Directory.dept).contains(
+                func.lower(string)) | func.lower(
+                Directory.name).contains(
+                func.lower(string)))
         return query
     except FloodWait as e:
         await asyncio.sleep(e.x)
