@@ -74,8 +74,7 @@ class Presets(object):
     UPDATE_EXT_CNF = "𝐄𝐱𝐭𝐞𝐧𝐬𝐢𝐨𝐧 𝐧𝐮𝐦𝐛𝐞𝐫 𝐟𝐨𝐫 𝐞𝐦𝐩𝐥𝐨𝐲: <code>{}</code>\n𝐇𝐚𝐬 𝐛𝐞𝐞𝐧 𝐮𝐩𝐝𝐚𝐭𝐞𝐝 𝐭𝐨: <code>{}</code>  ✅\n\n" \
                      "𝐂𝐡𝐞𝐜𝐤 𝐭𝐡𝐞 𝐮𝐩𝐝𝐚𝐭𝐞 𝐚𝐟𝐭𝐞𝐫 𝐬𝐨𝐦𝐞 𝐭𝐢𝐦𝐞 !"
     UPDATE_EXT_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n𝐄𝐦𝐩𝐥𝐨𝐲𝐞𝐞 𝐧𝐨𝐭 𝐟𝐨𝐮𝐧𝐝 𝐢𝐧 𝐝𝐚𝐭𝐚𝐛𝐚𝐬𝐞"
-    UPDATE_EXT_FORMAT_ERROR = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n𝐅𝐨𝐫𝐦𝐚𝐭 𝐬𝐡𝐨𝐮𝐥𝐝 𝐛𝐞:\n<code>/update emp extension</code>\n" \
-                              "<𝑠𝑝𝑎𝑐𝑒> 𝑖𝑛 𝑏𝑒𝑡𝑤𝑒𝑒𝑛 𝑡ℎ𝑒 𝑓𝑢𝑙𝑙 𝑛𝑎𝑚𝑒 𝑠ℎ𝑜𝑢𝑙𝑑 𝑏𝑒 𝑟𝑒𝑝𝑙𝑎𝑐𝑒 𝑤𝑖𝑡ℎ ' - ' (ℎ𝑦𝑝ℎ𝑒𝑛 𝑠𝑦𝑚𝑏𝑜𝑙)"
+    UPDATE_EXT_FORMAT_ERROR = "𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙛𝙤𝙧𝙢𝙖𝙩:\n\n𝐅𝐨𝐫𝐦𝐚𝐭 𝐬𝐡𝐨𝐮𝐥𝐝 𝐛𝐞:\n<i>/extension emp ext.No</i>"
     INVALID_IMG = "𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐬𝐡𝐨𝐮𝐥𝐝 𝐫𝐞𝐩𝐥𝐚𝐲 𝐭𝐨 𝐚𝐧𝐲 𝐩𝐡𝐨𝐭𝐨 𝐮𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐢𝐧 𝐭𝐞𝐥𝐞𝐠𝐫𝐚𝐦"
     IMG_UPLOAD_CNF = "𝘾𝙤𝙣𝙜𝙧𝙖𝙩𝙨 :\n\n𝘐𝘮𝘢𝘨𝘦 𝘶𝘱𝘥𝘢𝘵𝘦𝘥 𝘴𝘶𝘤𝘤𝘦𝘴𝘴𝘧𝘶𝘭𝘭𝘺 𝘪𝘯 𝘥𝘢𝘵𝘢𝘣𝘢𝘴𝘦 𝘧𝘰𝘳 𝘦𝘮𝘱: <b>{}</b>\n\n" \
                      "𝐎𝐩𝐞𝐧 <a href='{}'>𝐡𝐞𝐫𝐞</a>:\n\n𝐂𝐨𝐩𝐲 𝐡𝐞𝐫𝐞: <code>{}</code>"
@@ -88,3 +87,4 @@ class Presets(object):
     BROADCAST_ERROR = "𝙀𝙧𝙧𝙤𝙧:\n\n<i>This command should be used as a reply to any messaged or media. Just format a text" \
                       " message or send a media to bot. Finally, send this command as reply to the above message to" \
                       " broadcast it to the bot subscribers.</i>"
+    DESCRIPTION_TXT = "| {} | {} |"

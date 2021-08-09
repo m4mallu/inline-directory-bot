@@ -39,7 +39,7 @@ async def answer(bot, query: InlineQuery):
                                                user_name[id],
                                                'start',)
                                                ),
-                    description=file.dept.upper(),
+                    description=Presets.DESCRIPTION_TXT.format(file.dept.upper(), file.mobile),
                     reply_markup=get_reply_markup(user_name[id]),
                     thumb_url=await get_thumbnail(file)
                 )
