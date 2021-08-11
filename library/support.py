@@ -64,6 +64,8 @@ async def query_chat_participant(id, bot):
     else:
         pass
 
+
+# --------------------------- Get list of admins of this bot -------------------- #
 async def admin_info(bot):
     admins = []
     name = str()
@@ -81,6 +83,7 @@ async def admin_info(bot):
     return admins
 
 
+# ------------------------------ find user ids of the chat members ----------------- #
 async def map_chat_member(bot):
     user_ids = []
     async for users in bot.iter_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):

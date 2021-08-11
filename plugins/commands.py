@@ -50,18 +50,20 @@ async def start_bot(c: Client, m: Message):
 @Client.on_message(filters.private & filters.command('add'))
 async def user_update(b, m: Message):
     if m.from_user.id not in Config.ADMIN_USERS:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        msg = await m.reply_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     #
     count_emp = len(m.text.split(" ")[1:])
     if (count_emp in range(6, 7)) == bool(0):
-        msg = await m.reply_text(Presets.INVALID_FORMAT)
+        msg = await m.reply_text(
+            Presets.INVALID_FORMAT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(10)
-        await msg.delete()
         return
     #
     name = str(m.text).split(" ")[1].replace("-", " ")
@@ -74,14 +76,16 @@ async def user_update(b, m: Message):
     query = await query_emp(emp)
     if bool(query) == bool(0):
         await add_user(name, dept, mobile, extension, mail, emp, 0)
-        msg = await m.reply_text(Presets.USER_ADDED_MSG)
-        await asyncio.sleep(5)
-        await msg.delete()
+        msg = await m.reply_text(
+            Presets.USER_ADDED_MSG,
+            reply_markup=replay_markup_close
+        )
     else:
         await update_user(name, dept, mobile, extension, mail, emp)
-        msg = await m.reply_text(Presets.USER_UPDATED_MSG)
-        await asyncio.sleep(5)
-        await msg.delete()
+        msg = await m.reply_text(
+            Presets.USER_UPDATED_MSG,
+            reply_markup=replay_markup_close
+        )
 
 
 # ------------- adding image url to db from photo [Admin] ------------- #
@@ -98,27 +102,30 @@ async def add_thumb(b, m: Message):
     me = await Client.get_me(b)
     msg = await m.reply_text(Presets.DL_WAIT_MSG)
     if m.from_user.id not in Config.ADMIN_USERS:
-        await msg.edit_text(Presets.NOT_AUTH_TEXT)
+        await msg.edit_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     #
     if (" " in m.text) and (m.reply_to_message is not None) and m.reply_to_message.photo:
         try:
             emp = str(m.text).split(" ")[1]
         except Exception:
-            msg = await m.reply_text(Presets.INVALID_CMD)
+            msg = await m.reply_text(
+                Presets.INVALID_CMD,
+                reply_markup=replay_markup_close
+            )
             await m.delete()
-            await asyncio.sleep(5)
-            await msg.delete()
             return
         status = await query_emp(emp)
         if bool(status) == bool(0):
-            await msg.edit_text(Presets.NO_USER_MSG)
+            await msg.edit_text(
+                Presets.NO_USER_MSG,
+                reply_markup=replay_markup_close
+            )
             await m.delete()
-            await asyncio.sleep(5)
-            await msg.delete()
             return
         reply_message = m.reply_to_message
         # Downloading photo to bot local
@@ -161,9 +168,10 @@ async def add_thumb(b, m: Message):
             pass
     else:
         await m.delete()
-        await msg.edit_text(Presets.INVALID_IMG)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.INVALID_IMG,
+            reply_markup=replay_markup_close
+        )
 
 
 # ----------------- add csv data to db table [Admin] ---------------------- #
@@ -175,10 +183,11 @@ async def add_thumb(b, m: Message):
 @Client.on_message(filters.private & filters.command('load'))
 async def load_database(b, m: Message):
     if m.from_user.id not in Config.ADMIN_USERS:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        msg = await m.reply_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     #
     file = m.reply_to_message
@@ -193,27 +202,31 @@ async def load_database(b, m: Message):
             row_count = len(data)
             # checking the first row length in given csv as 7 (db table length)#
             if (row_count in range(7, 8)) == bool(0):
-                await msg.edit_text(Presets.CSV_ERROR.format(file.document.file_name))
-                await asyncio.sleep(5)
-                await msg.delete()
+                await msg.edit_text(
+                    Presets.CSV_ERROR.format(file.document.file_name),
+                    reply_markup=replay_markup_close
+                )
                 os.remove(file_name)
                 return
             else:
                 try:
                     await load_db(file_name)
-                    await msg.edit_text(Presets.CSV_LOAD_CNF.format(file.document.file_name))
-                    await asyncio.sleep(5)
-                    await msg.delete()
+                    await msg.edit_text(
+                        Presets.CSV_LOAD_CNF.format(file.document.file_name),
+                        reply_markup=replay_markup_close
+                    )
                 except Exception:
-                    await msg.edit_text(Presets.CSV_ERROR.format(file.document.file_name))
-                    await asyncio.sleep(5)
-                    await msg.delete()
+                    await msg.edit_text(
+                        Presets.CSV_ERROR.format(file.document.file_name),
+                        reply_markup=replay_markup_close
+                    )
             os.remove(file_name)
     else:
-        msg = await m.reply_text(Presets.NO_CSV_MSG)
+        msg = await m.reply_text(
+            Presets.NO_CSV_MSG,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
 
 
 # ------------------------- mass delete records [Admin] -------------------- #
@@ -221,23 +234,26 @@ async def load_database(b, m: Message):
 async def mass_delete_emp(b, m: Message):
     msg = await m.reply_text(Presets.WAIT_MSG)
     if m.from_user.id not in Config.ADMIN_USERS:
-        await msg.edit_text(Presets.NOT_AUTH_TEXT)
+        await msg.edit_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     if " " in m.text:
         emp_list = m.text.split(" ")[1:]
         await mass_delete(emp_list)
         await m.delete()
-        await msg.edit_text(Presets.MASS_DEL_CNF)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.MASS_DEL_CNF,
+            reply_markup=replay_markup_close
+        )
     else:
         await m.delete()
-        await msg.edit_text(Presets.MASS_DEL_ERROR)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.MASS_DEL_ERROR,
+            reply_markup=replay_markup_close
+        )
 
 
 # -------------------------------- Update Extension number -------------------------- #
@@ -251,10 +267,11 @@ async def extension_update(bot, m: Message):
     except FloodWait as e:
         await asyncio.sleep(e.x)
     except Exception:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        msg = await m.reply_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     cmd_count = len(m.text.split(" ")[1:])
     msg = await m.reply_text(Presets.WAIT_MSG)
@@ -265,19 +282,22 @@ async def extension_update(bot, m: Message):
             await update_extension(emp, ext)
         except Exception:
             await m.delete()
-            await msg.edit_text(Presets.UPDATE_EXT_ERROR)
-            await asyncio.sleep(5)
-            await msg.delete()
+            await msg.edit_text(
+                Presets.UPDATE_EXT_ERROR,
+                reply_markup=replay_markup_close
+            )
             return
         await m.delete()
-        await msg.edit_text(Presets.UPDATE_EXT_CNF.format(emp, ext))
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.UPDATE_EXT_CNF.format(emp, ext),
+            reply_markup=replay_markup_close
+        )
     else:
         await m.delete()
-        await msg.edit_text(Presets.UPDATE_EXT_FORMAT_ERROR)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.UPDATE_EXT_FORMAT_ERROR,
+            reply_markup=replay_markup_close
+        )
 
 
 # --------------------------------- Update Mobile Number -------------------------------- #
@@ -293,10 +313,11 @@ async def update_mobile(bot, m: Message):
     except FloodWait as e:
         await asyncio.sleep(e.x)
     except Exception:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        msg = await m.reply_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     cmd_count = len(m.text.split(" ")[1:])
     msg = await m.reply_text(Presets.WAIT_MSG)
@@ -309,10 +330,11 @@ async def update_mobile(bot, m: Message):
             pass
         status = await query_emp(emp)
         if bool(status) == bool(0):
-            await msg.edit_text(Presets.NO_USER_MSG)
+            await msg.edit_text(
+                Presets.NO_USER_MSG,
+                reply_markup=replay_markup_close
+            )
             await m.delete()
-            await asyncio.sleep(5)
-            await msg.delete()
             return
         if bool(m1 and m2):
             mobile_numbers = str(m1) + " " + "|" + " " + str(m2)
@@ -320,14 +342,16 @@ async def update_mobile(bot, m: Message):
             mobile_numbers = str(m1)
         await update_mobile_num(emp, mobile_numbers)
         await m.delete()
-        await msg.edit_text(Presets.UPDATE_MOBILE_TXT)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.UPDATE_MOBILE_TXT,
+            reply_markup=replay_markup_close
+        )
     else:
         await m.delete()
-        await msg.edit_text(Presets.LIMIT_MOBILE)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.LIMIT_MOBILE,
+            reply_markup=replay_markup_close
+        )
 
 
 # -------------------------------- Update E-Mail address -------------------------- #
@@ -342,10 +366,11 @@ async def update_email_id(bot, m: Message):
     except FloodWait as e:
         await asyncio.sleep(e.x)
     except Exception:
-        msg = await m.reply_text(Presets.NOT_AUTH_TEXT)
+        msg = await m.reply_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     cmd_count = len(m.text.split(" ")[1:])
     msg = await m.reply_text(Presets.WAIT_MSG)
@@ -357,28 +382,31 @@ async def update_email_id(bot, m: Message):
             pass
         status = await query_emp(emp)
         if bool(status) == bool(0):
-            await msg.edit_text(Presets.NO_USER_MSG)
+            await msg.edit_text(
+                Presets.NO_USER_MSG,
+                reply_markup=replay_markup_close
+            )
             await m.delete()
-            await asyncio.sleep(5)
-            await msg.delete()
             return
         await update_email(emp, email)
         await m.delete()
-        await msg.edit_text(Presets.UPDATE_EMAIL)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.UPDATE_EMAIL,
+            reply_markup=replay_markup_close
+        )
     else:
         await m.delete()
-        await msg.edit_text(Presets.UPDATE_EMAIL_ERROR)
-        await asyncio.sleep(5)
-        await msg.delete()
+        await msg.edit_text(
+            Presets.UPDATE_EMAIL_ERROR,
+            reply_markup=replay_markup_close
+        )
 
 
 # -------------------------------- Get Admin List -------------------------- #
 @Client.on_message(filters.private & filters.command('admins'))
 async def view_admins(bot, m: Message):
     id = m.from_user.id
-    msg = await m.reply_text(Presets.WAIT_MSG)
+    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
     try:
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
                                                   user_id=id
@@ -386,10 +414,11 @@ async def view_admins(bot, m: Message):
     except FloodWait as e:
         await asyncio.sleep(e.x)
     except Exception:
-        await msg.edit(Presets.NOT_AUTH_TEXT)
+        await msg.edit(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     results = await admin_info(bot)
     message = '\n'.join(results)
@@ -400,14 +429,16 @@ async def view_admins(bot, m: Message):
                         reply_markup=replay_markup_close
                         )
 
+# --------------- function to broadcast the messages to the bot users ---------------- #
 @Client.on_message(filters.private & filters.command('send'))
 async def send_message_to_users(bot, m: Message):
-    msg = await m.reply_text(Presets.WAIT_MSG)
+    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
     if m.from_user.id not in Config.SUDO_USERS:
-        await msg.edit_text(Presets.NOT_AUTH_TEXT)
+        await msg.edit_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
         await m.delete()
-        await asyncio.sleep(5)
-        await msg.delete()
         return
     fail_count = pass_count = int()
     if (" " not in m.text) and ("send" in m.text) and (m.reply_to_message is not None):
@@ -435,3 +466,45 @@ async def send_message_to_users(bot, m: Message):
         await msg.edit_text(Presets.BROADCAST_ERROR,
                             reply_markup=replay_markup_close
                             )
+
+
+# --------------------- Function to get the name-list of bot users ------------------- #
+@Client.on_message(filters.private & filters.command('users'))
+async def get_bot_users(bot, m: Message):
+    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
+    if m.from_user.id not in Config.SUDO_USERS:
+        await msg.edit_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
+        await m.delete()
+        return
+    if (" " not in m.text) and ("users" in m.text):
+        await m.delete()
+        count = int()
+        string = names = str()
+        users = await map_chat_member(bot)
+        for user in users:
+            try:
+                ping = await bot.send_chat_action(chat_id=user, action='typing')
+                string = await bot.get_users(user)
+                if not bool(string.first_name):
+                    name = str(string.last_name)
+                elif not bool(string.last_name):
+                    name = str(string.first_name)
+                else:
+                    name = str(string.first_name) + ' ' + str(string.last_name)
+                names = name.replace(name, names + '\n' + name)
+                count += 1
+            except Exception:
+                pass
+        await msg.edit_text(
+            Presets.BOT_USERS.format(count, names),
+            reply_markup=replay_markup_close
+        )
+    else:
+        await m.delete()
+        await msg.edit(
+            Presets.QUERY_USERS_ERROR,
+            reply_markup=replay_markup_close
+        )
