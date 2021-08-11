@@ -9,12 +9,18 @@
 from presets import Presets
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
+from library.support import chat_member, query_chat_participant
 from library.buttons import reply_markup_back, reply_markup_help
 
 
 @Client.on_callback_query(filters.regex(r'^support_btn$'))
 async def bot_support(c, cb: CallbackQuery):
     me = await Client.get_me(c)
+    id = cb.from_user.id
+    await query_chat_participant(id, c)
+    if id not in chat_member:
+        await cb.answer(Presets.NOT_AUTH_TEXT_CB, True)
+        return
     await cb.answer()
     await cb.message.edit_text(Presets.SUPPORT_TXT,
                                parse_mode='html',

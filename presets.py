@@ -48,6 +48,11 @@ class Presets(object):
 ░▒▓ <a href='https://telegra.ph/inline-directory-bot-help-06-19'>𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐚𝐭𝐢𝐨𝐧</a> ▓▒░ <a href='https://t.me/space4renjith'>𝙍𝙚𝙣𝙟𝙞𝙩𝙝 𝙍</a>
 
     """
+    NOT_AUTH_TEXT_CB = """
+❌ 𝗬𝗼𝘂 𝗮𝗿𝗲 𝗻𝗼𝘁 𝗮𝘂𝘁𝗵𝗼𝗿𝗶𝘇𝗲𝗱 ❌
+----------------------------------------------
+𝘠𝘰𝘶 𝘢𝘳𝘦 𝘯𝘰𝘵 𝘢 𝘮𝘦𝘮𝘣𝘦𝘳 𝘪𝘯 𝘵𝘩𝘦 𝘰𝘧𝘧𝘪𝘤𝘪𝘢𝘭 𝘤𝘩𝘢𝘯𝘯𝘦𝘭 / 𝘨𝘳𝘰𝘶𝘱 𝘤𝘰𝘯𝘧𝘪𝘨𝘶𝘳𝘦𝘥 𝘪𝘯 𝘵𝘩𝘪𝘴 𝘣𝘰𝘵 !
+"""
     WELCOME_TXT = "<b>Hello.. {} 🙋🏻</b>\n<i>Tap '<strike>Search Here</strike>' to search inline. " \
                   "Try '<strike>Help</strike>' to know, how to use this bot." \
                   " If you have any difficulty to use this bot, please contact the support. To make a copy of mine, " \
