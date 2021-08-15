@@ -182,7 +182,7 @@ async def add_thumb(b, m: Message):
 # 4.Add data to db table
 @Client.on_message(filters.private & filters.command('load'))
 async def load_database(b, m: Message):
-    if m.from_user.id not in Config.ADMIN_USERS:
+    if m.from_user.id not in Config.SUDO_USERS:
         msg = await m.reply_text(
             Presets.NOT_AUTH_TEXT,
             reply_markup=replay_markup_close

@@ -8,35 +8,14 @@
 
 class Presets(object):
     RESULTS = """
-𝐍𝐚𝐦𝐞  - <b>{}</b>
-𝐃𝐞𝐩𝐭    - {}
-𝐌𝐨𝐛𝐢𝐥𝐞- {}
-𝐄𝐱𝐭.     - {}
-𝐄𝐦𝐚𝐢𝐥  - <code>{}</code>
-𝐄𝐌𝐏   - {}
+<b>Name  - {}
+Dept    - {}
+Mobile-</b> {}
+<b>Ext.</b>      - {}
+<b>Email  - <code>{}</code>
+EMP    - {}</b>
 \xad                                                                               \xad
 <a href='t.me/{}?start={}'>🏠 <b>𝖧𝗈𝗆𝖾</b></a>
-    """
-    HELP_TXT = """
-░▒▓ <b>Procedure:</b>
-          <code>1. Tap the button 'Search Here'
-    2. Search by the:
-            - Name.
-            - Phone Number.
-            - Department.
-    3. Tap the required result.</code>
-
-░▒▓ <b>Advantages:</b>
-          <code>1. Search inline in any chat.
-    2. Admins user support.
-    3. Mass delete / upload.
-    4. User can update data.</code>
-    
-░▒▓ <a href='https://telegra.ph/How-to-update-contact-details-07-01'>𝙐𝙥𝙙𝙖𝙩𝙞𝙣𝙜 𝙩𝙝𝙚 𝙘𝙤𝙣𝙩𝙖𝙘𝙩 𝙙𝙚𝙩𝙖𝙞𝙡𝙨</a>
- 
-░▒▓ <a href='https://telegra.ph/inline-directory-bot-help-06-19'>𝙋𝙧𝙤𝙟𝙚𝙘𝙩 𝙙𝙤𝙘𝙪𝙢𝙚𝙣𝙩𝙖𝙞𝙤𝙣</a>
-    
-░▒▓ <i>For any queries, contact SUPPORT</i>
     """
     SUPPORT_TXT = """
 𝙁𝙤𝙧 :
@@ -57,6 +36,7 @@ class Presets(object):
                   "Try '<strike>Help</strike>' to know, how to use this bot." \
                   " If you have any difficulty to use this bot, please contact the support. To make a copy of mine, " \
                   " please visit my <u>Github Source Repo</u>. Have a nice day 👏</i>"
+    HELP_TXT = "<b>Select the appropriate button to know the functions and usages of this bot.</b>"
     THUMBNAIL_URL = 'https://telegra.ph/file/06610b5b61f20d1dcb38a.png'
     NO_RESULT_TXT = "❌ 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬:"
     NO_RESULT_TXT_STR = "😥 𝐍𝐨 𝐫𝐞𝐬𝐮𝐥𝐭𝐬 𝐟𝐨𝐫 👉 {}"
