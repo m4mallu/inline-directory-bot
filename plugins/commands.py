@@ -17,7 +17,7 @@ from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
-from library.support import get_reply_markup, admin_info, map_chat_member
+from library.support import admin_info, map_chat_member
 from library.buttons import reply_markup_help, replay_markup_close
 from library.sql import (query_emp,
                          add_user,
@@ -98,7 +98,6 @@ async def user_update(b, m: Message):
 # 7.Removing photo from bot local
 @Client.on_message(filters.private & filters.command('photo'))
 async def add_thumb(b, m: Message):
-    me = await Client.get_me(b)
     msg = await m.reply_text(Presets.DL_WAIT_MSG)
     if m.from_user.id not in Config.ADMIN_USERS:
         await msg.edit_text(
@@ -157,7 +156,7 @@ async def add_thumb(b, m: Message):
         await msg.edit_text(Presets.IMG_UPLOAD_CNF.format(emp, url, url),
                             parse_mode='html',
                             disable_web_page_preview=True,
-                            reply_markup=get_reply_markup(me.username)
+                            reply_markup=replay_markup_close
                             )
         try:
             # Removing downloaded image from bot local

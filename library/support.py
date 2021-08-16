@@ -39,9 +39,6 @@ def get_reply_markup(username):
         [
             InlineKeyboardButton('Share bot', url=url),
             InlineKeyboardButton("Search Here", switch_inline_query_current_chat='')
-        ],
-        [
-            InlineKeyboardButton("❌  Close", callback_data="close_btn")
         ]
     ]
     reply_markup_share = InlineKeyboardMarkup(buttons)
