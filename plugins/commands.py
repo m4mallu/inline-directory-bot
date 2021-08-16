@@ -59,11 +59,10 @@ async def user_update(b, m: Message):
     #
     count_emp = len(m.text.split(" ")[1:])
     if (count_emp in range(6, 7)) == bool(0):
-        msg = await m.reply_text(
-            Presets.INVALID_FORMAT,
-            reply_markup=replay_markup_close
-        )
         await m.delete()
+        msg = await m.reply_text(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
         return
     #
     name = str(m.text).split(" ")[1].replace("-", " ")
@@ -74,7 +73,7 @@ async def user_update(b, m: Message):
     emp = str(m.text).split(" ")[6]
     #
     query = await query_emp(emp)
-    if bool(query) == bool(0):
+    if not bool(query):
         await add_user(name, dept, mobile, extension, mail, emp, 0)
         msg = await m.reply_text(
             Presets.USER_ADDED_MSG,
@@ -113,14 +112,13 @@ async def add_thumb(b, m: Message):
         try:
             emp = str(m.text).split(" ")[1]
         except Exception:
-            msg = await m.reply_text(
-                Presets.INVALID_CMD,
-                reply_markup=replay_markup_close
-            )
             await m.delete()
+            msg = await m.reply_text(Presets.INVALID_OPERATION)
+            await asyncio.sleep(10)
+            await msg.delete()
             return
         status = await query_emp(emp)
-        if bool(status) == bool(0):
+        if not bool(status):
             await msg.edit_text(
                 Presets.NO_USER_MSG,
                 reply_markup=replay_markup_close
@@ -168,10 +166,9 @@ async def add_thumb(b, m: Message):
             pass
     else:
         await m.delete()
-        await msg.edit_text(
-            Presets.INVALID_IMG,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # ----------------- add csv data to db table [Admin] ---------------------- #
@@ -222,11 +219,10 @@ async def load_database(b, m: Message):
                     )
             os.remove(file_name)
     else:
-        msg = await m.reply_text(
-            Presets.NO_CSV_MSG,
-            reply_markup=replay_markup_close
-        )
         await m.delete()
+        msg = await m.reply_text(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # ------------------------- mass delete records [Admin] -------------------- #
@@ -250,10 +246,9 @@ async def mass_delete_emp(b, m: Message):
         )
     else:
         await m.delete()
-        await msg.edit_text(
-            Presets.MASS_DEL_ERROR,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # -------------------------------- Update Extension number -------------------------- #
@@ -294,10 +289,9 @@ async def extension_update(bot, m: Message):
         )
     else:
         await m.delete()
-        await msg.edit_text(
-            Presets.UPDATE_EXT_FORMAT_ERROR,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # --------------------------------- Update Mobile Number -------------------------------- #
@@ -348,10 +342,9 @@ async def update_mobile(bot, m: Message):
         )
     else:
         await m.delete()
-        await msg.edit_text(
-            Presets.LIMIT_MOBILE,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # -------------------------------- Update E-Mail address -------------------------- #
@@ -396,10 +389,9 @@ async def update_email_id(bot, m: Message):
         )
     else:
         await m.delete()
-        await msg.edit_text(
-            Presets.UPDATE_EMAIL_ERROR,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # -------------------------------- Get Admin List -------------------------- #
@@ -463,9 +455,9 @@ async def send_message_to_users(bot, m: Message):
                             )
     else:
         await m.delete()
-        await msg.edit_text(Presets.BROADCAST_ERROR,
-                            reply_markup=replay_markup_close
-                            )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
 
 
 # --------------------- Function to get the name-list of bot users ------------------- #
@@ -504,7 +496,6 @@ async def get_bot_users(bot, m: Message):
         )
     else:
         await m.delete()
-        await msg.edit(
-            Presets.QUERY_USERS_ERROR,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()

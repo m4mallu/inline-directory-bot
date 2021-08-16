@@ -17,7 +17,6 @@ from library.buttons import reply_markup_back, reply_markup_help, reply_markup_o
 @Client.on_callback_query(filters.regex(r'^support_btn$'))
 async def bot_support(c, cb: CallbackQuery):
     id = cb.from_user.id
-    await cb.answer()
     await query_chat_participant(id, c)
     if id not in chat_member:
         await cb.answer(Presets.NOT_AUTH_TEXT_CB, True)
@@ -137,3 +136,12 @@ async def bot_working(c, cb: CallbackQuery):
     await cb.answer()
     await cb.message.edit(Help.HOW_TO_DO_TXT,
                           reply_markup=reply_markup_help_back)
+
+
+@Client.on_callback_query(filters.regex(r'^error_help_btn$'))
+async def error_help_button(c, cb: CallbackQuery):
+    await cb.answer()
+    await cb.message.edit(
+        Presets.HELP_TXT,
+        reply_markup=reply_markup_objects
+    )

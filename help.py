@@ -2,11 +2,11 @@ class Help(object):
     ADD_CONTACT_TXT = "🌍 <b><u>How to add a contact in this bot?</u></b>\n\n<i>A contact can be added to this bot in a " \
                       "special format, mentioned  below. If any errors in the format, the bot wont be able to " \
                       "add the contact to it's database, results popping up an error message.</i>\n\n<b>📚 Format:</b>\n" \
-                      "<code>/add name dept mobile Ext.No mail emp\n\nEg: /add David-John-S Electrical +91568455788 " \
-                      "davidjohn@gmail.com 255</code>\n\n<b>💡 Tips:</b>\n<i>Spaces between a full name should be " \
-                      "replaced by the '-' hyphen symbol (David-John-S). Phone numbers need to be added " \
-                      "in an international format. All the parameters in the command should be separated by spaces.</i>" \
-                      "<b><strike>This command can only execute by the admins of this bot.</strike></b>"
+                      "<code>/add name dept mobile Ext.No mail emp</code>\n\nEg: <code>/add David-John-S Electrical " \
+                      "+91568455788 08482545875 davidjohn@gmail.com 255</code>\n\n<b>💡 Tips:</b>\n<i>Spaces between " \
+                      "a full name should be replaced by the '-' hyphen symbol (David-John-S). Phone numbers need to " \
+                      "be added in an international format. All the parameters in the command should be separated by " \
+                      "spaces.</i><b><strike>This command can only execute by the admins of this bot.</strike></b>"
 
     DEL_CONTACT_TXT = "🌍 <b><u>How to delete a contact in this bot?</u></b>\n\n<i>Using a special command, we can" \
                       " remove one or multiple contacts from this bot. The Format is mentioned below. If any errors" \

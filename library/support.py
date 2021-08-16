@@ -35,8 +35,15 @@ async def get_thumbnail(file):
 # ---------------------------- reply markup share button --------------------- #
 def get_reply_markup(username):
     url = 't.me/share/url?url=' + quote(Presets.SHARE_BUTTON_TEXT.format(username))
-    buttons = [[InlineKeyboardButton('Share bot', url=url),
-                InlineKeyboardButton("Search Here", switch_inline_query_current_chat='')]]
+    buttons = [
+        [
+            InlineKeyboardButton('Share bot', url=url),
+            InlineKeyboardButton("Search Here", switch_inline_query_current_chat='')
+        ],
+        [
+            InlineKeyboardButton("❌  Close", callback_data="close_btn")
+        ]
+    ]
     reply_markup_share = InlineKeyboardMarkup(buttons)
     return reply_markup_share
 

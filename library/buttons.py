@@ -17,6 +17,9 @@ help_button = [
     [
         InlineKeyboardButton("👷🏿‍♂️ Support", callback_data="support_btn"),
         InlineKeyboardButton("🔎  Search Here", switch_inline_query_current_chat='')
+    ],
+    [
+        InlineKeyboardButton("❌  Close", callback_data="close_btn")
     ]
 ]
 
