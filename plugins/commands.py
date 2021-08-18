@@ -411,9 +411,9 @@ async def view_admins(bot, m: Message):
         )
         await m.delete()
         return
+    await m.delete()
     results = await admin_info(bot)
     message = '\n'.join(results)
-    await m.delete()
     await msg.edit_text(Presets.ADMINS_INFO.format(message),
                         parse_mode='html',
                         disable_web_page_preview=True,

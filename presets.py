@@ -32,15 +32,25 @@ EMP    - {}</b>
 ----------------------------------------------
 You are not a member in the official channel / group configured in this bot
 """
+    NOT_AUTH_TEXT_GEN_CB = """
+❌ You are not authorized ❌
+----------------------------------------------
+The function you are trying to perform is only available to the sudo users of this bot. 
+"""
+    RESET_TXT = """
+Success:  ✅
+--------------------
+The system has been rebooted !
+"""
     WELCOME_TXT = "<b>Hello.. {} 🙋🏻</b>\n<i>Tap '<strike>Search Here</strike>' to search inline. " \
                   "Try '<strike>Help</strike>' to know, how to use this bot." \
                   " If you have any difficulty to use this bot, please contact the support. To make a copy of mine, " \
                   " please visit my <u>Github Source Repo</u>. Have a nice day 👏</i>"
     HELP_TXT = "<b>Select the appropriate button to know the functions and usages of this bot.</b>"
     THUMBNAIL_URL = 'https://telegra.ph/file/06610b5b61f20d1dcb38a.png'
-    NO_RESULT_TXT = "❌ <b>No results</b>"
-    NO_RESULT_TXT_STR = "😥 <b>No results for</b> 👉 {}"
-    RESULT_TXT = "👀 <b>Results:</b>"
+    NO_RESULT_TXT = "❌ No results:"
+    NO_RESULT_TXT_STR = "😥 No results for 👉 {}"
+    RESULT_TXT = "👀 Results:"
     DL_WAIT_MSG = "<b>Downloading... Please wait</b>"
     WAIT_MSG = "<b>Processing... Plz wait</b> ⏱"
     WAIT_MSG_LONG = "<u><b>Processing... Plz wait</b></u> ⏱\n<i>This may take some time...</i>"
@@ -59,7 +69,8 @@ You are not a member in the official channel / group configured in this bot
                      "<b>Open <a href='{}'>Here</a></b>\n\n<b>Copy Here</b> <code>{}</code>"
     UPDATE_MOBILE_TXT = "<b>Success:</b> ✅\n\n<i>Mobile number updated successfully</i>"
     UPDATE_EMAIL = "<b>Success:</b> ✅\n\n<i>Email id updated successfully</i>"
-    INVALID_OPERATION = "<b>Invalid Operation</b> ⚠️\n<i>Try help to know the command usage</i>"
+    INVALID_OPERATION = "<b><u>Invalid Operation</u></b> ⚠️\n\n1️⃣ <code>Click the button</code> <b>HELP</b>\n" \
+                        "2️⃣ <code>Know the functions and usage.</code>\n3️⃣ <code>Try again later... </code>"
     ADMINS_INFO = "<b>Admins of this bot:</b>\xad                             \xad\n\n{}"
     BROADCAST_MSG = "<b>Message send successfully: ✅\n\xad                                   \xad\nPassed- {}\nFailed- {}</b>"
     DESCRIPTION_TXT = "| {} | {} |"
