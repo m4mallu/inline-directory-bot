@@ -84,5 +84,3 @@ class Help(object):
                     "<b>Search Here</b>\n\n2️⃣ Search by the\n     🔹Name\n     🔹Department\n     🔹Phone number\n\n" \
                     "3️⃣ Tap the result\n\n<b>💡 Tips:</b>\nThe results will be delivered only to <strike><b>those who " \
                     "are the member </b></strike> of the organization's official channel or group.</i>"
-
-

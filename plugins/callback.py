@@ -7,7 +7,6 @@
 
 import os
 import sys
-import asyncio
 from help import Help
 from presets import Presets
 from pyrogram import Client, filters
@@ -163,4 +162,3 @@ async def reboot_bot(c, cb: CallbackQuery):
         return
     await cb.answer(Presets.RESET_TXT, True)
     os.execl(sys.executable, sys.executable, *sys.argv)
-
