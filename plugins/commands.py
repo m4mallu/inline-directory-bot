@@ -437,18 +437,23 @@ async def send_message_to_users(bot, m: Message):
         member = await map_chat_member(bot)
         for chat_id in member:
             try:
-                await bot.copy_message(
-                    chat_id=chat_id,
-                    from_chat_id=m.chat.id,
-                    message_id=m.reply_to_message.message_id,
-                    caption=m.caption
-                )
-                pass_count += 1
-            except FloodWait as e:
-                await asyncio.sleep(e.x)
+                await bot.send_chat_action(chat_id=chat_id, action='typing')
             except Exception:
                 fail_count += 1
                 pass
+            else:
+                try:
+                    await bot.copy_message(
+                        chat_id=chat_id,
+                        from_chat_id=m.chat.id,
+                        message_id=m.reply_to_message.message_id,
+                        caption=m.caption
+                    )
+                    pass_count += 1
+                except FloodWait as e:
+                    await asyncio.sleep(e.x)
+                except Exception:
+                    pass
         await msg.edit_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
                             reply_markup=replay_markup_close
                             )
@@ -477,7 +482,10 @@ async def get_bot_users(bot, m: Message):
         users = await map_chat_member(bot)
         for user in users:
             try:
-                ping = await bot.send_chat_action(chat_id=user, action='typing')
+                await bot.send_chat_action(chat_id=user, action='typing')
+            except Exception:
+                pass
+            else:
                 string = await bot.get_users(user)
                 if not bool(string.first_name):
                     name = str(string.last_name)
@@ -487,8 +495,6 @@ async def get_bot_users(bot, m: Message):
                     name = str(string.first_name) + ' ' + str(string.last_name)
                 names = name.replace(name, names + '\n' + name)
                 count += 1
-            except Exception:
-                pass
         await msg.edit_text(
             Presets.BOT_USERS.format(count, names),
             reply_markup=replay_markup_close
