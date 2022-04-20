@@ -91,6 +91,5 @@ async def admin_info(bot):
 async def map_chat_member(bot):
     user_ids = []
     async for users in bot.iter_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):
-        member = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=users.user.id)
-        user_ids.append(member.user.id)
+        user_ids.append(users.user.id)
     return user_ids
