@@ -6,3 +6,4 @@ __pycache__
 .idea
 .git
 .session-journal
+bot.session-journal

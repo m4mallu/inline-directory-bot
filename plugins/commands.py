@@ -491,9 +491,12 @@ async def get_bot_users(bot, m: Message):
                 user = await bot.get_users(ids)
                 count += 1
                 mention = f'{user.mention()}'.replace(f'{user.mention()}', mention + '\n' + f'{count}. {user.mention()}')
+                print(mention)
         await msg.delete()
         await m.reply_text(
             Presets.BOT_USERS.format(count, mention),
+            parse_mode=ParseMode.HTML,
+            disable_web_page_preview=True,
             reply_markup=replay_markup_close
         )
     else:
