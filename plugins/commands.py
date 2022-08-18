@@ -480,26 +480,20 @@ async def get_bot_users(bot, m: Message):
     if (" " not in m.text) and ("users" in m.text):
         await m.delete()
         count = int()
-        string = names = str()
-        users = await map_chat_member(bot)
-        for user in users:
+        user = names = mention = str()
+        user_ids = await map_chat_member(bot)
+        for ids in user_ids:
             try:
-                await bot.send_chat_action(user, ChatAction.TYPING)
+                await bot.send_chat_action(ids, ChatAction.TYPING)
             except Exception:
                 pass
             else:
-                string = await bot.get_users(user)
-                if not bool(string.first_name):
-                    name = str(string.last_name)
-                elif not bool(string.last_name):
-                    name = str(string.first_name)
-                else:
-                    name = str(string.first_name) + ' ' + str(string.last_name)
-                names = name.replace(name, names + '\n' + name)
+                user = await bot.get_users(ids)
                 count += 1
+                mention = f'{user.mention()}'.replace(f'{user.mention()}', mention + '\n' + f'{count}. {user.mention()}')
         await msg.delete()
         await m.reply_text(
-            Presets.BOT_USERS.format(count, names),
+            Presets.BOT_USERS.format(count, mention),
             reply_markup=replay_markup_close
         )
     else:
