@@ -24,6 +24,16 @@ help_button = [
     ]
 ]
 
+support_button = [
+    [
+        InlineKeyboardButton('Documentation', url='https://telegra.ph/inline-directory-bot-help-06-19'),
+        InlineKeyboardButton('Developer', url='t.me/space4renjith')
+    ],
+    [
+        InlineKeyboardButton("⬅️ Back", callback_data="back_btn")
+    ]
+]
+
 
 main_back = [
     [
@@ -79,3 +89,4 @@ reply_markup_back = InlineKeyboardMarkup(main_back)
 reply_markup_help = InlineKeyboardMarkup(help_button)
 reply_markup_help_back = InlineKeyboardMarkup(help_back)
 reply_markup_objects = InlineKeyboardMarkup(help_objects)
+reply_markup_support = InlineKeyboardMarkup(support_button)

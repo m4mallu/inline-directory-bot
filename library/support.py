@@ -28,15 +28,17 @@ async def get_thumbnail(file):
         thumb = file.thumb_url
         thumb_nail = thumb if (thumb != "0") else Presets.THUMBNAIL_URL
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     return thumb_nail
 
 
 # ---------------------------- reply markup share button --------------------- #
 def get_reply_markup(username):
     url = 't.me/share/url?url=' + quote(Presets.SHARE_BUTTON_TEXT.format(username))
+
     buttons = [
         [
+            InlineKeyboardButton('🏠 Home', url=f't.me/{username}?start=start'),
             InlineKeyboardButton('Share bot', url=url),
             InlineKeyboardButton("Search Here", switch_inline_query_current_chat='')
         ]
@@ -53,7 +55,7 @@ async def query_chat_participant(id, bot):
             me = await bot.get_me()
             user_name[id] = me.username
         except FloodWait as e:
-            await asyncio.sleep(e.x)
+            await asyncio.sleep(e.value)
     else:
         pass
     # Checking the queried user is a member of the default chat room.
@@ -61,7 +63,7 @@ async def query_chat_participant(id, bot):
         try:
             member = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=id)
         except FloodWait as e:
-            await asyncio.sleep(e.x)
+            await asyncio.sleep(e.value)
         except Exception:
             return
         chat_member[id] = id
@@ -72,24 +74,24 @@ async def query_chat_participant(id, bot):
 # --------------------------- Get list of admins of this bot -------------------- #
 async def admin_info(bot):
     admins = []
-    name = str()
-    for names in Config.ADMIN_USERS:
+    user = str()
+    for admin in Config.ADMIN_USERS:
         try:
-            name = await bot.get_users(names)
+            user = await bot.get_users(admin)
         except FloodWait as e:
-            await asyncio.sleep(e.x)
+            await asyncio.sleep(e.value)
         except Exception:
             pass
-        if name:
-            link = '🔰' + ' ' + name.mention()
+        if user:
+            link = '🔰' + ' ' + f'{user.mention()}'
             admins.append(link)
-            name = str()
+            user = str()
     return admins
 
 
 # ------------------------------ find user ids of the chat members ----------------- #
 async def map_chat_member(bot):
     user_ids = []
-    async for users in bot.iter_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):
-        user_ids.append(users.user.id)
+    async for user in bot.get_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):
+        user_ids.append(user.user.id)
     return user_ids

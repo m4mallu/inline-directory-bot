@@ -11,7 +11,7 @@ from presets import Presets
 from library.sql import query_msg
 from library.support import chat_member, user_name
 from library.support import get_thumbnail, get_reply_markup, query_chat_participant
-from pyrogram.types import InlineQueryResultArticle, InputTextMessageContent, InlineQuery
+from pyrogram.types import InputTextMessageContent, InlineQuery, InlineQueryResultPhoto
 
 
 # -------------------------- Answering Inline query --------------------------------- #
@@ -27,8 +27,11 @@ async def answer(bot, query: InlineQuery):
     for file in search:
         try:
             results.append(
-                InlineQueryResultArticle(
-                    title=file.name,
+                InlineQueryResultPhoto(
+                    photo_url=await get_thumbnail(file),
+                    thumb_url=await get_thumbnail(file),
+                    photo_width=300,
+                    photo_height=300,
                     input_message_content=InputTextMessageContent(
                         Presets.RESULTS.format(file.name,
                                                file.dept.upper(),
@@ -36,12 +39,10 @@ async def answer(bot, query: InlineQuery):
                                                file.extension,
                                                file.mail,
                                                file.emp,
-                                               user_name[id],
-                                               'start',)
-                                               ),
-                    description=Presets.DESCRIPTION_TXT.format(file.dept.upper(), file.mobile),
-                    reply_markup=get_reply_markup(user_name[id]),
-                    thumb_url=await get_thumbnail(file)
+                                               )
+                    ),
+                    description=Presets.DESCRIPTION_TXT.format(file.name, file.dept.upper(), file.mobile),
+                    reply_markup=get_reply_markup(user_name[id])
                 )
             )
         except Exception:

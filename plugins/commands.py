@@ -17,6 +17,7 @@ from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
+from pyrogram.enums import ParseMode, ChatAction
 from library.support import admin_info, map_chat_member
 from library.buttons import reply_markup_help, replay_markup_close
 from library.sql import (query_emp,
@@ -28,7 +29,6 @@ from library.sql import (query_emp,
                          update_extension,
                          update_mobile_num,
                          update_email)
-
 
 if bool(os.environ.get("ENV", False)):
     from sample_config import Config
@@ -154,10 +154,9 @@ async def add_thumb(b, m: Message):
         await m.delete()
         # Sharing url to bot
         await msg.edit_text(Presets.IMG_UPLOAD_CNF.format(emp, url, url),
-                            parse_mode='html',
+                            parse_mode=ParseMode.HTML,
                             disable_web_page_preview=True,
-                            reply_markup=replay_markup_close
-                            )
+                            reply_markup=replay_markup_close)
         try:
             # Removing downloaded image from bot local
             os.remove(thumb_path)
@@ -259,7 +258,7 @@ async def extension_update(bot, m: Message):
                                                   user_id=id
                                                   )
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     except Exception:
         msg = await m.reply_text(
             Presets.NOT_AUTH_TEXT,
@@ -304,7 +303,7 @@ async def update_mobile(bot, m: Message):
                                                   user_id=id
                                                   )
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     except Exception:
         msg = await m.reply_text(
             Presets.NOT_AUTH_TEXT,
@@ -356,7 +355,7 @@ async def update_email_id(bot, m: Message):
                                                   user_id=id
                                                   )
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     except Exception:
         msg = await m.reply_text(
             Presets.NOT_AUTH_TEXT,
@@ -403,7 +402,7 @@ async def view_admins(bot, m: Message):
                                                   user_id=id
                                                   )
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     except Exception:
         await msg.edit(
             Presets.NOT_AUTH_TEXT,
@@ -414,11 +413,13 @@ async def view_admins(bot, m: Message):
     await m.delete()
     results = await admin_info(bot)
     message = '\n'.join(results)
-    await msg.edit_text(Presets.ADMINS_INFO.format(message),
-                        parse_mode='html',
-                        disable_web_page_preview=True,
-                        reply_markup=replay_markup_close
-                        )
+    await msg.delete()
+    await m.reply_text(Presets.ADMINS_INFO.format(message),
+                       parse_mode=ParseMode.HTML,
+                       disable_web_page_preview=True,
+                       reply_markup=replay_markup_close
+                       )
+
 
 # --------------- function to broadcast the messages to the bot users ---------------- #
 @Client.on_message(filters.private & filters.command('send'))
@@ -437,7 +438,7 @@ async def send_message_to_users(bot, m: Message):
         member = await map_chat_member(bot)
         for chat_id in member:
             try:
-                await bot.send_chat_action(chat_id=chat_id, action='typing')
+                await bot.send_chat_action(chat_id, ChatAction.TYPING)
             except Exception:
                 fail_count += 1
                 pass
@@ -446,17 +447,18 @@ async def send_message_to_users(bot, m: Message):
                     await bot.copy_message(
                         chat_id=chat_id,
                         from_chat_id=m.chat.id,
-                        message_id=m.reply_to_message.message_id,
+                        message_id=m.reply_to_message_id,
                         caption=m.caption
                     )
                     pass_count += 1
                 except FloodWait as e:
-                    await asyncio.sleep(e.x)
+                    await asyncio.sleep(e.value)
                 except Exception:
                     pass
-        await msg.edit_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
-                            reply_markup=replay_markup_close
-                            )
+        await msg.delete()
+        await m.reply_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
+                           reply_markup=replay_markup_close
+                           )
     else:
         await m.delete()
         await msg.edit(Presets.INVALID_OPERATION)
@@ -482,7 +484,7 @@ async def get_bot_users(bot, m: Message):
         users = await map_chat_member(bot)
         for user in users:
             try:
-                await bot.send_chat_action(chat_id=user, action='typing')
+                await bot.send_chat_action(user, ChatAction.TYPING)
             except Exception:
                 pass
             else:
@@ -495,7 +497,8 @@ async def get_bot_users(bot, m: Message):
                     name = str(string.first_name) + ' ' + str(string.last_name)
                 names = name.replace(name, names + '\n' + name)
                 count += 1
-        await msg.edit_text(
+        await msg.delete()
+        await m.reply_text(
             Presets.BOT_USERS.format(count, names),
             reply_markup=replay_markup_close
         )

@@ -1,6 +1,6 @@
 # --- Libraries Used:
 # --- For-Bot-Working --------- #
-pyrogram==1.4.8
+pyrogram
 TgCrypto
 # --- For-Image-Adj. ---------- #
 hachoir

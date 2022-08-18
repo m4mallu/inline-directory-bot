@@ -13,19 +13,15 @@ Dept    - {}
 Mobile-</b> {}
 <b>Ext.</b>      - {}
 <b>Email  - <code>{}</code>
-EMP    - {}</b>
-\xad                                                                               \xad
-<a href='t.me/{}?start={}'>🏠 <b>𝖧𝗈𝗆𝖾</b></a>
+EMP    - {}</b>\xad                                                                     \xad
     """
     SUPPORT_TXT = """
-<b>For :
-- Queries
+<b>For :</b>
+<code>- Queries
 - Suggestions
-- Reporting Bugs</b>
+- Reporting Bugs</code>
 
-
-░▒▓ <b><a href='https://telegra.ph/inline-directory-bot-help-06-19'>Documentation</a> ▓▒░ <a href='https://t.me/space4renjith'>Renjith R</a></b>
-
+🔰<b> Please contact the Developer</b> 🔰
     """
     NOT_AUTH_TEXT_CB = """
 ❌ You are not authorized ❌
@@ -62,7 +58,7 @@ The system has been rebooted !
     NOT_AUTH_TEXT = "<b>Error:</b>\n\n<i>You are not authorized to perform this function. Contact support !</i>"
     USER_ADDED_MSG = "<b>Success:</b> ✅\n\n<i>User has been added to the database.</i>"
     USER_UPDATED_MSG = "<b>Success:</b> ✅\n\n<i>User exists, updated to the database</i>"
-    SHARE_BUTTON_TEXT = "<b>Hi..  👋\nLet's checkout @{}\nFor searching contacts</b>"
+    SHARE_BUTTON_TEXT = "Hi..  👋\nUse @{} for searching contacts amoung our institution."
     UPDATE_EXT_CNF = "<b>Success:</b> ✅\n\n<i>Extension number of <b>{}</b> has been updated to : <code>{}</code></i>"
     UPDATE_EXT_ERROR = "<b>Error:</b>\n\n<i>Employee code not found in my database </i> 😢"
     IMG_UPLOAD_CNF = "<b>Success:</b> ✅\n\n<i>Image updated in database for emp:</i> <b>{}</b>\n\n" \
@@ -73,5 +69,5 @@ The system has been rebooted !
                         "2️⃣ <code>Know the functions and usage.</code>\n3️⃣ <code>Try again later... </code>"
     ADMINS_INFO = "<b>Admins of this bot:</b>\xad                             \xad\n\n{}"
     BROADCAST_MSG = "<b>Message send successfully: ✅\n\xad                                   \xad\nPassed- {}\nFailed- {}</b>"
-    DESCRIPTION_TXT = "| {} | {} |"
+    DESCRIPTION_TXT = "{} | {} | {} |"
     BOT_USERS = "<b>Total users : {}</b>\xad                             \xad\n<i>{}</i>"

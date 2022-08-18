@@ -9,10 +9,12 @@ import os
 import sys
 from help import Help
 from presets import Presets
+from pyrogram.enums import ParseMode
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery
 from library.support import chat_member, query_chat_participant
-from library.buttons import reply_markup_back, reply_markup_help, reply_markup_objects, reply_markup_help_back
+from library.buttons import (reply_markup_back, reply_markup_help, reply_markup_objects,
+                             reply_markup_help_back, reply_markup_support)
 
 
 if bool(os.environ.get("ENV", False)):
@@ -30,9 +32,9 @@ async def bot_support(c, cb: CallbackQuery):
         return
     await cb.answer()
     await cb.message.edit_text(Presets.SUPPORT_TXT,
-                               parse_mode='html',
+                               parse_mode=ParseMode.HTML,
                                disable_web_page_preview=True,
-                               reply_markup=reply_markup_back
+                               reply_markup=reply_markup_support
                                )
 
 
@@ -49,12 +51,13 @@ async def help_text(c, cb: CallbackQuery):
     await cb.answer()
     await cb.edit_message_text(Presets.HELP_TXT,
                                reply_markup=reply_markup_objects,
-                               parse_mode='html',
+                               parse_mode=ParseMode.HTML,
                                disable_web_page_preview=True
                                )
 
 @Client.on_callback_query(filters.regex(r'^close_btn$'))
 async def close_button(c, cb: CallbackQuery):
+    await cb.answer()
     await cb.message.delete()
 
 

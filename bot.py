@@ -7,6 +7,7 @@
 
 import os
 from pyrogram import Client
+from pyrogram.enums import ParseMode
 
 
 if bool(os.environ.get("ENV", False)):
@@ -20,7 +21,7 @@ else:
 class Bot(Client):
     def __init__(self):
         super().__init__(
-            "bot",
+            name="bot",
             bot_token=Config.TG_BOT_TOKEN,
             api_id=Config.APP_ID,
             api_hash=Config.API_HASH,
@@ -33,7 +34,7 @@ class Bot(Client):
     async def start(self):
         await super().start()
         me = await self.get_me()
-        self.set_parse_mode("html")
+        self.set_parse_mode(ParseMode.HTML)
         self.LOGGER(__name__).info(
             f"@{me.username}  started! "
         )
