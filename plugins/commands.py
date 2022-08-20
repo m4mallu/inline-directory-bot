@@ -12,14 +12,14 @@ import asyncio
 from PIL import Image
 from presets import Presets
 from telegraph import upload_file
-from pyrogram.types import Message
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 from pyrogram.enums import ParseMode, ChatAction
-from library.support import admin_info, map_chat_member
-from library.buttons import reply_markup_help, replay_markup_close
+from pyrogram.types import Message, InlineKeyboardMarkup
+from library.support import map_chat_member, gen_user_markups
+from library.buttons import reply_markup_help, replay_markup_close, secial_close_btn
 from library.sql import (query_emp,
                          add_user,
                          update_user,
@@ -398,27 +398,34 @@ async def view_admins(bot, m: Message):
     id = m.from_user.id
     msg = await m.reply_text(Presets.WAIT_MSG_LONG)
     try:
-        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM,
-                                                  user_id=id
-                                                  )
+        member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=id)
     except FloodWait as e:
         await asyncio.sleep(e.value)
     except Exception:
-        await msg.edit(
-            Presets.NOT_AUTH_TEXT,
-            reply_markup=replay_markup_close
-        )
+        await msg.edit(Presets.NOT_AUTH_TEXT, reply_markup=replay_markup_close)
         await m.delete()
         return
     await m.delete()
-    results = await admin_info(bot)
-    message = '\n'.join(results)
+    #
+    count = int()
+    buttons = list()
+    user = button = mention = str()
+    #
+    for admin in Config.ADMIN_USERS:
+        try:
+            user = await bot.get_users(admin)
+        except FloodWait as e:
+            await asyncio.sleep(e.value)
+        except Exception:
+            pass
+        else:
+            count += 1
+            mention = user.mention()
+            button = await gen_user_markups(count, mention)
+            buttons.append(button)
+    buttons.append(secial_close_btn)
     await msg.delete()
-    await m.reply_text(Presets.ADMINS_INFO.format(message),
-                       parse_mode=ParseMode.HTML,
-                       disable_web_page_preview=True,
-                       reply_markup=replay_markup_close
-                       )
+    await m.reply_text(Presets.ADMINS_INFO.format(count), reply_markup=InlineKeyboardMarkup(buttons))
 
 
 # --------------- function to broadcast the messages to the bot users ---------------- #
@@ -480,7 +487,8 @@ async def get_bot_users(bot, m: Message):
     if (" " not in m.text) and ("users" in m.text):
         await m.delete()
         count = int()
-        user = names = mention = str()
+        buttons = list()
+        user = button = mention = str()
         user_ids = await map_chat_member(bot)
         for ids in user_ids:
             try:
@@ -490,14 +498,14 @@ async def get_bot_users(bot, m: Message):
             else:
                 user = await bot.get_users(ids)
                 count += 1
-                mention = f'{user.mention()}'.replace(f'{user.mention()}', mention + '\n' + f'{count}. {user.mention()}')
-                print(mention)
+                mention = user.mention()
+                button = await gen_user_markups(count, mention)
+                buttons.append(button)
+        buttons.append(secial_close_btn)
         await msg.delete()
         await m.reply_text(
-            Presets.BOT_USERS.format(count, mention),
-            parse_mode=ParseMode.HTML,
-            disable_web_page_preview=True,
-            reply_markup=replay_markup_close
+            Presets.BOT_USERS.format(count),
+            reply_markup=InlineKeyboardMarkup(buttons)
         )
     else:
         await m.delete()

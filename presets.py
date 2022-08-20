@@ -67,7 +67,7 @@ The system has been rebooted !
     UPDATE_EMAIL = "<b>Success:</b> ✅\n\n<i>Email id updated successfully</i>"
     INVALID_OPERATION = "<b><u>Invalid Operation</u></b> ⚠️\n\n1️⃣ <code>Click the button</code> <b>HELP</b>\n" \
                         "2️⃣ <code>Know the functions and usage.</code>\n3️⃣ <code>Try again later... </code>"
-    ADMINS_INFO = "<b>Admins of this bot:</b>\xad                             \xad\n\n{}"
+    ADMINS_INFO = "<b>Total admins : {}</b>\xad                   \xad\n"
     BROADCAST_MSG = "<b>Message send successfully: ✅\n\xad                                   \xad\nPassed- {}\nFailed- {}</b>"
     DESCRIPTION_TXT = "{} | {} | {} |"
-    BOT_USERS = "<b>Total users : {}</b>\xad                             \xad\n<i>{}</i>"
+    BOT_USERS = "<b>Total users : {}</b>\xad                   \xad\n"

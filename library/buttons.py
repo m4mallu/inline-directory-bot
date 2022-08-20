@@ -84,6 +84,8 @@ help_objects = [
     ]
 ]
 
+secial_close_btn = [InlineKeyboardButton("❌  Close", callback_data="close_btn")]
+
 replay_markup_close = InlineKeyboardMarkup(close_button)
 reply_markup_back = InlineKeyboardMarkup(main_back)
 reply_markup_help = InlineKeyboardMarkup(help_button)

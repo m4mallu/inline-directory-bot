@@ -6,6 +6,7 @@
 #  Licence  : GPL-3
 
 import os
+import re
 import asyncio
 from presets import Presets
 from urllib.parse import quote
@@ -71,27 +72,24 @@ async def query_chat_participant(id, bot):
         pass
 
 
-# --------------------------- Get list of admins of this bot -------------------- #
-async def admin_info(bot):
-    admins = []
-    user = str()
-    for admin in Config.ADMIN_USERS:
-        try:
-            user = await bot.get_users(admin)
-        except FloodWait as e:
-            await asyncio.sleep(e.value)
-        except Exception:
-            pass
-        if user:
-            link = '🔰' + ' ' + f'{user.mention()}'
-            admins.append(link)
-            user = str()
-    return admins
-
-
 # ------------------------------ find user ids of the chat members ----------------- #
 async def map_chat_member(bot):
     user_ids = []
     async for user in bot.get_chat_members(chat_id=Config.DEFAULT_CHAT_ROOM):
         user_ids.append(user.user.id)
     return user_ids
+
+
+# ----------------------- Generate replay markups for the user queries ------------- #
+async def gen_user_markups(count, mention):
+    user_markups = str()
+    sub1 = "<a href"
+    sub2 = ">"
+    idx1 = mention.index(sub1)
+    idx2 = mention.index(sub2)
+    res = ''
+    name = re.search('>(.*)<', mention).group(1)
+    for idx in range(idx1 + len(sub1) + 1, idx2):
+        res = str(res + mention[idx]).replace('tg://user?id', 'tg://openmessage?user_id')
+    user_markups = [InlineKeyboardButton(f'{count}. {name}', url=res)]
+    return user_markups
