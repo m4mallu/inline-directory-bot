@@ -32,6 +32,9 @@ class Config(object):
     # Group / channel Id: Members to which inline query answered
     DEFAULT_CHAT_ROOM = int(os.environ.get("DEFAULT_CHAT_ROOM", ""))
 
+    # Developer id to receive logs
+    DEV_ID = int(os.environ.get("DEV_ID", ""))
+
     # List of admin user ids for special functions(Storing as an array)
     ADMIN_USERS = set(int(x) for x in os.environ.get("ADMIN_USERS", "").split())
 

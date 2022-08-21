@@ -396,7 +396,7 @@ async def update_email_id(bot, m: Message):
 @Client.on_message(filters.private & filters.command('admins'))
 async def view_admins(bot, m: Message):
     id = m.from_user.id
-    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
+    msg = await m.reply_text(Presets.WAIT_MSG)
     try:
         member_status = await bot.get_chat_member(chat_id=Config.DEFAULT_CHAT_ROOM, user_id=id)
     except FloodWait as e:
@@ -431,7 +431,7 @@ async def view_admins(bot, m: Message):
 # --------------- function to broadcast the messages to the bot users ---------------- #
 @Client.on_message(filters.private & filters.command('send'))
 async def send_message_to_users(bot, m: Message):
-    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
+    msg = await m.reply_text(Presets.WAIT_MSG)
     if m.from_user.id not in Config.SUDO_USERS:
         await msg.edit_text(
             Presets.NOT_AUTH_TEXT,
@@ -476,7 +476,7 @@ async def send_message_to_users(bot, m: Message):
 # --------------------- Function to get the name-list of bot users ------------------- #
 @Client.on_message(filters.private & filters.command('users'))
 async def get_bot_users(bot, m: Message):
-    msg = await m.reply_text(Presets.WAIT_MSG_LONG)
+    msg = await m.reply_text(Presets.WAIT_MSG)
     if m.from_user.id not in Config.SUDO_USERS:
         await msg.edit_text(
             Presets.NOT_AUTH_TEXT,
@@ -487,8 +487,7 @@ async def get_bot_users(bot, m: Message):
     if (" " not in m.text) and ("users" in m.text):
         await m.delete()
         count = int()
-        buttons = list()
-        user = button = mention = str()
+        user = mention = str()
         user_ids = await map_chat_member(bot)
         for ids in user_ids:
             try:
@@ -498,15 +497,26 @@ async def get_bot_users(bot, m: Message):
             else:
                 user = await bot.get_users(ids)
                 count += 1
-                mention = user.mention()
-                button = await gen_user_markups(count, mention)
-                buttons.append(button)
-        buttons.append(secial_close_btn)
+                mention = f'{user.mention()}'.replace(f'{user.mention()}',
+                                                      mention + '\n' + f'{count}. {user.mention()}')
         await msg.delete()
-        await m.reply_text(
-            Presets.BOT_USERS.format(count),
-            reply_markup=InlineKeyboardMarkup(buttons)
-        )
+        if len(mention) > 4096:
+            x = 4096
+            messages = [mention[y - x:y] for y in range(x, len(mention) + x, x)]
+            for message in messages:
+                await m.reply_text(
+                    Presets.BOT_USERS.format(count, message),
+                    parse_mode=ParseMode.HTML,
+                    disable_web_page_preview=True,
+                    reply_markup=replay_markup_close
+                )
+        else:
+            await m.reply_text(
+                Presets.BOT_USERS.format(count, mention),
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+                reply_markup=replay_markup_close
+            )
     else:
         await m.delete()
         await msg.edit(Presets.INVALID_OPERATION)

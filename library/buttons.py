@@ -49,7 +49,8 @@ help_back = [
 
 close_button = [
     [
-        InlineKeyboardButton("Close", callback_data="close_btn")
+        InlineKeyboardButton("❌  Close", callback_data="close_btn"),
+        InlineKeyboardButton("🔎  Search", switch_inline_query_current_chat='')
     ]
 ]
 
@@ -84,7 +85,8 @@ help_objects = [
     ]
 ]
 
-secial_close_btn = [InlineKeyboardButton("❌  Close", callback_data="close_btn")]
+secial_close_btn = [InlineKeyboardButton("❌  Close", callback_data="close_btn"),
+                    InlineKeyboardButton("🔎  Search Here", switch_inline_query_current_chat='')]
 
 replay_markup_close = InlineKeyboardMarkup(close_button)
 reply_markup_back = InlineKeyboardMarkup(main_back)

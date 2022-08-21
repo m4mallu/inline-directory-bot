@@ -9,6 +9,7 @@
         "APP_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
         "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
         "TG_BOT_TOKEN": {"description": "Get Bot Token From @BotFather Bot", "required": true},
+        "DEV_ID": {"description": "Developer Id to receive logs (not mandatory)", "required": false},
         "DEFAULT_CHAT_ROOM": {"description": "Group / channel Id: Members to which inline query answered", "required": true},
         "ADMIN_USERS": {"description":  "List of admin user ids for special functions separated by space", "required":  true},
         "SUDO_USERS": {"description":  "List of Super admin user ids for broadcast messages. separated by space", "required":  true},
