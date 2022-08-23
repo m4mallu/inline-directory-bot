@@ -5,21 +5,17 @@
 #  Author   : Renjith Mangal [ https://t.me/space4renjith ]
 #  Licence  : GPL-3
 
-import os
 import asyncio
 from pyrogram import Client
 from presets import Presets
 from library.sql import query_msg
-from pyrogram.enums import ParseMode
-from library.buttons import replay_markup_close
 from library.support import chat_member, user_name
 from library.support import get_thumbnail, get_reply_markup, query_chat_participant
 from pyrogram.types import InputTextMessageContent, InlineQuery, InlineQueryResultPhoto
 
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-else:
-    from config import Config
+
+queried_user = {}
+
 
 # -------------------------- Answering Inline query --------------------------------- #
 @Client.on_inline_query()
@@ -66,22 +62,6 @@ async def answer(bot, query: InlineQuery):
             )
         except Exception:
             pass
-        if (len(query.query) >= 3) and Config.DEV_ID is not None:
-            user = await bot.get_users(id)
-            try:
-                await bot.send_message(
-                    chat_id=Config.DEV_ID,
-                    text=Presets.SEARCH_RESULT_LOG.format(user.mention(), query.query),
-                    parse_mode=ParseMode.HTML,
-                    disable_web_page_preview=True,
-                    reply_markup=replay_markup_close,
-                    disable_notification=True
-                )
-            except Exception:
-                pass
-            await asyncio.sleep(5)
-        else:
-            return
     else:
         switch_pm_text = Presets.NO_RESULT_TXT
         if string:
@@ -95,5 +75,8 @@ async def answer(bot, query: InlineQuery):
         except Exception:
             pass
     #
+    user = await bot.get_users(id)
+    global queried_user
+    queried_user[id] = user.mention()
     await asyncio.sleep(5)
     results.clear()

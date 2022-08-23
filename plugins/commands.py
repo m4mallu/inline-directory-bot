@@ -15,6 +15,7 @@ from telegraph import upload_file
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from hachoir.parser import createParser
+from plugins.inline import queried_user
 from hachoir.metadata import extractMetadata
 from pyrogram.enums import ParseMode, ChatAction
 from pyrogram.types import Message, InlineKeyboardMarkup
@@ -29,6 +30,7 @@ from library.sql import (query_emp,
                          update_extension,
                          update_mobile_num,
                          update_email)
+
 
 if bool(os.environ.get("ENV", False)):
     from sample_config import Config
@@ -522,3 +524,23 @@ async def get_bot_users(bot, m: Message):
         await msg.edit(Presets.INVALID_OPERATION)
         await asyncio.sleep(10)
         await msg.delete()
+
+
+@Client.on_message(filters.private & filters.incoming)
+async def get_inline_result_selected_text(bot, m: Message):
+    id = m.from_user.id
+    user_query = str(m.text).partition('\n')[0].replace('Name  - ', '')
+    if Config.DEV_ID is not None:
+        try:
+            await bot.send_message(
+                chat_id=Config.DEV_ID,
+                text=Presets.SEARCH_RESULT_LOG.format(queried_user[id], user_query),
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+                reply_markup=replay_markup_close,
+                disable_notification=True
+            )
+        except Exception:
+            pass
+        else:
+            return
