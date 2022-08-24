@@ -65,8 +65,8 @@ The system has been rebooted !
                      "<b>Open <a href='{}'>Here</a></b>\n\n<b>Copy Here</b> <code>{}</code>"
     UPDATE_MOBILE_TXT = "<b>Success:</b> ✅\n\n<i>Mobile number updated successfully</i>"
     UPDATE_EMAIL = "<b>Success:</b> ✅\n\n<i>Email id updated successfully</i>"
-    INVALID_OPERATION = "<b><u>Invalid Operation</u></b> ⚠️\n\n1️⃣ <code>Click the button</code> <b>HELP</b>\n" \
-                        "2️⃣ <code>Know the functions and usage.</code>\n3️⃣ <code>Try again later... </code>"
+    ERROR_ANIMATION = "https://telegra.ph/file/df04e21727b3cb47bd6cb.gif"
+    INVALID_OPERATION = "<b>Wrong use !</b> Plase see the HELP !"
     ADMINS_INFO = "<b>Admins of this bot [{}]</b>\n"
     BROADCAST_MSG = "<b>Message send successfully: ✅\n\xad                                   \xad\nPassed- {}\nFailed- {}</b>"
     DESCRIPTION_TXT = "{} | {} | {} |"
