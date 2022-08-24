@@ -529,8 +529,10 @@ async def get_bot_users(bot, m: Message):
 @Client.on_message(filters.private & filters.incoming)
 async def get_inline_result_selected_text(bot, m: Message):
     id = m.from_user.id
-    user_query = str(m.text).partition('\n')[0].replace('Name  - ', '')
-    if Config.DEV_ID is not None:
+    if id in Config.SUDO_USERS:
+        return
+    elif (Config.DEV_ID is not None) and m.text.startswith('Name  -'):
+        user_query = str(m.text).partition('\n')[0].replace('Name  - ', '')
         try:
             await bot.send_message(
                 chat_id=Config.DEV_ID,
@@ -542,5 +544,5 @@ async def get_inline_result_selected_text(bot, m: Message):
             )
         except Exception:
             pass
-        else:
-            return
+    else:
+        return
