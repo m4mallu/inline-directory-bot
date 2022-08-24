@@ -62,7 +62,7 @@ async def user_update(b, m: Message):
     count_emp = len(m.text.split(" ")[1:])
     if (count_emp in range(6, 7)) == bool(0):
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
+        msg = await m.reply_text(Presets.INVALID_OPERATION)
         await asyncio.sleep(15)
         await msg.delete()
         return
@@ -114,8 +114,8 @@ async def add_thumb(b, m: Message):
             emp = str(m.text).split(" ")[1]
         except Exception:
             await m.delete()
-            msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-            await asyncio.sleep(10)
+            msg = await m.reply_text(Presets.INVALID_OPERATION)
+            await asyncio.sleep(15)
             await msg.delete()
             return
         status = await query_emp(emp)
@@ -166,8 +166,8 @@ async def add_thumb(b, m: Message):
             pass
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -220,8 +220,8 @@ async def load_database(b, m: Message):
             os.remove(file_name)
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        msg = await m.reply_text(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -246,8 +246,8 @@ async def mass_delete_emp(b, m: Message):
         )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -289,8 +289,8 @@ async def extension_update(bot, m: Message):
         )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -342,8 +342,8 @@ async def update_mobile(bot, m: Message):
         )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -389,8 +389,8 @@ async def update_email_id(bot, m: Message):
         )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -470,8 +470,8 @@ async def send_message_to_users(bot, m: Message):
                            )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
@@ -502,6 +502,7 @@ async def get_bot_users(bot, m: Message):
                 mention = f'{user.mention()}'.replace(f'{user.mention()}',
                                                       mention + '\n' + f'{count}. {user.mention()}')
         await msg.delete()
+        print(len(mention))
         if len(mention) > 4096:
             x = 4096
             messages = [mention[y - x:y] for y in range(x, len(mention) + x, x)]
@@ -521,8 +522,8 @@ async def get_bot_users(bot, m: Message):
             )
     else:
         await m.delete()
-        msg = await m.reply_animation(animation=Presets.ERROR_ANIMATION, caption=Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(15)
         await msg.delete()
 
 
