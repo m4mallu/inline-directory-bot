@@ -7,3 +7,7 @@ __pycache__
 .git
 .session-journal
 bot.session-journal
+database.csv
+database.db
+database.sqlite3
+

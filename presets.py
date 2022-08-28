@@ -71,4 +71,5 @@ The system has been rebooted !
     BROADCAST_MSG = "<b>Message send successfully: ✅\n\xad                                   \xad\nPassed- {}\nFailed- {}</b>"
     DESCRIPTION_TXT = "{} | {} | {} |"
     BOT_USERS = "<b>Total users of this bot [{}]</b>\n{}"
-    SEARCH_RESULT_LOG = "🔍 <b>SEARCHED</b> 🔎\n\nPerson: {}\n\nResult: <b>{}</b>"
+    SEARCH_RESULT_LOG = "🔍 <b>SEARCHED</b> 🔎\n\xad                                                                  " \
+                        "   \xad\nPerson: {}\n\nResult: <b>{}</b> "

@@ -29,7 +29,8 @@ from library.sql import (query_emp,
                          mass_delete,
                          update_extension,
                          update_mobile_num,
-                         update_email)
+                         update_email,
+                         get_all_data)
 
 
 if bool(os.environ.get("ENV", False)):
@@ -502,7 +503,6 @@ async def get_bot_users(bot, m: Message):
                 mention = f'{user.mention()}'.replace(f'{user.mention()}',
                                                       mention + '\n' + f'{count}. {user.mention()}')
         await msg.delete()
-        print(len(mention))
         if len(mention) > 4096:
             x = 4096
             messages = [mention[y - x:y] for y in range(x, len(mention) + x, x)]
@@ -527,6 +527,34 @@ async def get_bot_users(bot, m: Message):
         await msg.delete()
 
 
+# --------------------- Function to get the currnet databse  as csv ------------------- #
+@Client.on_message(filters.private & filters.command('download'))
+async def save_database(bot, m: Message):
+    id = m.from_user.id
+    if Config.DEV_ID and id == Config.DEV_ID:
+        await get_all_data()
+        try:
+            await m.reply_document(
+                document=open('database.csv', 'rb'),
+            )
+        except Exception:
+            await m.reply_text(
+                text='Something went wrong!',
+                reply_markup=replay_markup_close
+            )
+        try:
+            os.remove('database.csv')
+        except Exception:
+            pass
+        await m.delete()
+    else:
+        await m.reply_text(
+            text=Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
+        await m.delete()
+
+# --------------------- Function to get the log updates for the dev id ------------------- #
 @Client.on_message(filters.private & filters.incoming)
 async def get_inline_result_selected_text(bot, m: Message):
     id = m.from_user.id
@@ -546,4 +574,4 @@ async def get_inline_result_selected_text(bot, m: Message):
         except Exception:
             pass
     else:
-        return
+        pass

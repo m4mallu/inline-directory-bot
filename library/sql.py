@@ -83,7 +83,7 @@ async def query_msg(string):
                 func.lower(string)))
         return query
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     finally:
         SESSION.close()
 
@@ -202,3 +202,18 @@ async def update_email(emp, value):
             SESSION.query(Directory).filter(Directory.emp == emp).update({'mail': value})
         finally:
             SESSION.commit()
+
+
+async def get_all_data():
+    try:
+        import csv
+        outfile = open('database.csv', 'w')
+        outcsv = csv.writer(outfile)
+        records = SESSION.query(Directory).all()
+        outcsv.writerow([column.name for column in Directory.__mapper__.columns])
+        [outcsv.writerow([getattr(curr, column.name) for column in Directory.__mapper__.columns]) for curr in records]
+        outfile.close()
+    except Exception:
+        pass
+    finally:
+        SESSION.close()
