@@ -8,7 +8,7 @@
 
 class Presets(object):
     RESULTS = """
-<b>Name  - {}
+<b>Name  - <a href="{}">{}</a>
 Dept    - {}
 Mobile-</b> {}
 <b>Ext.</b>      - {}

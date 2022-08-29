@@ -36,7 +36,8 @@ async def answer(bot, query: InlineQuery):
                     photo_width=300,
                     photo_height=300,
                     input_message_content=InputTextMessageContent(
-                        Presets.RESULTS.format(file.name,
+                        Presets.RESULTS.format(file.thumb_url,
+                                               file.name,
                                                file.dept.upper(),
                                                file.mobile,
                                                file.extension,
