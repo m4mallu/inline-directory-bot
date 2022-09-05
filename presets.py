@@ -54,7 +54,7 @@ The system has been rebooted !
     NO_USER_MSG = "<b>Error:</b>\n\n<i>User not found in database</i>"
     CSV_LOAD_CNF = "<b>Success:</b> ✅\n\n<i>Datas in <code>{}</code>\nhad been successfully loaded to the bot database</i>"
     CSV_ERROR = "<b>Error:</b>\n\n<i>Check the 👉 <code>{}</code>\nand try again later.. !</i>"
-    URL_ERROR = "<b>Error:</b>\n\n<i>Something went wring ! Try again later with a different file..!</i>"
+    URL_ERROR = "<b>Error:</b>\n\n<i>Something went really wrong ! Try again later !</i>  🤥"
     NOT_AUTH_TEXT = "<b>Error:</b>\n\n<i>You are not authorized to perform this function. Contact support !</i>"
     USER_ADDED_MSG = "<b>Success:</b> ✅\n\n<i>User has been added to the database.</i>"
     USER_UPDATED_MSG = "<b>Success:</b> ✅\n\n<i>User exists, updated to the database</i>"
@@ -73,3 +73,4 @@ The system has been rebooted !
     BOT_USERS = "<b>Total users of this bot [{}]</b>\n{}"
     SEARCH_RESULT_LOG = "🔍 <b>SEARCHED</b> 🔎\n\xad                                                                  " \
                         "   \xad\nPerson: {}\n\nResult: <b>{}</b> "
+    TOTAL_USERS = "<b>Total users in active - {}</b>\n"

@@ -47,6 +47,12 @@ help_back = [
     ]
 ]
 
+single_close = [
+    [
+        InlineKeyboardButton("❌ Close", callback_data="close_btn")
+    ]
+]
+
 close_button = [
     [
         InlineKeyboardButton("❌  Close", callback_data="close_btn"),
@@ -94,3 +100,4 @@ reply_markup_help = InlineKeyboardMarkup(help_button)
 reply_markup_help_back = InlineKeyboardMarkup(help_back)
 reply_markup_objects = InlineKeyboardMarkup(help_objects)
 reply_markup_support = InlineKeyboardMarkup(support_button)
+single_close_button = InlineKeyboardMarkup(single_close)

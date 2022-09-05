@@ -20,7 +20,7 @@ from hachoir.metadata import extractMetadata
 from pyrogram.enums import ParseMode, ChatAction
 from pyrogram.types import Message, InlineKeyboardMarkup
 from library.support import map_chat_member, gen_user_markups
-from library.buttons import reply_markup_help, replay_markup_close, secial_close_btn
+from library.buttons import reply_markup_help, replay_markup_close, secial_close_btn, single_close_button
 from library.sql import (query_emp,
                          add_user,
                          update_user,
@@ -489,8 +489,8 @@ async def get_bot_users(bot, m: Message):
         return
     if (" " not in m.text) and ("users" in m.text):
         await m.delete()
-        count = int()
-        user = mention = str()
+        user = string = str()
+        user_list = []
         user_ids = await map_chat_member(bot)
         for ids in user_ids:
             try:
@@ -499,26 +499,41 @@ async def get_bot_users(bot, m: Message):
                 pass
             else:
                 user = await bot.get_users(ids)
-                count += 1
-                mention = f'{user.mention()}'.replace(f'{user.mention()}',
-                                                      mention + '\n' + f'{count}. {user.mention()}')
-        await msg.delete()
-        if len(mention) > 4096:
-            x = 4096
-            messages = [mention[y - x:y] for y in range(x, len(mention) + x, x)]
-            for message in messages:
+                user_list.append(user.mention())
+        """Now we have the list of users & we need to send it to the user by 50 users per message"""
+        for x in user_list:
+            string += string + x               # adding total string in order to calculate the total length
+        #
+        total_users = len(user_list)
+        string_length = len(string)
+        #
+        if string_length >= 4097:               # if the length is greater than 4096 then split the list
+            n = 0
+            o = 50
+            length = len(user_list)
+            div = round(length / 50)
+            new_list = []
+            for i in user_list:                     # split the list into 50 users per list
+                if user_list[n:o]:
+                    new_list.append(user_list[n:o])
+                n += 50
+                o += 50
+            await msg.edit_text(Presets.TOTAL_USERS.format(total_users), reply_markup=single_close_button)
+            for x in new_list:                      # send the list to the user
+                items = '\n'.join(x)
                 await m.reply_text(
-                    Presets.BOT_USERS.format(count, message),
-                    parse_mode=ParseMode.HTML,
+                    items,
                     disable_web_page_preview=True,
-                    reply_markup=replay_markup_close
+                    reply_markup=single_close_button
                 )
         else:
+            items = '\n'.join(user_list)
+            await msg.delete()
             await m.reply_text(
-                Presets.BOT_USERS.format(count, mention),
+                Presets.BOT_USERS.format(total_users, items),
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
-                reply_markup=replay_markup_close
+                reply_markup=single_close_button
             )
     else:
         await m.delete()
