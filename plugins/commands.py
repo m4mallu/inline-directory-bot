@@ -477,6 +477,51 @@ async def send_message_to_users(bot, m: Message):
 
 
 # --------------------- Function to get the name-list of bot users ------------------- #
+@Client.on_message(filters.private & filters.command('send'))
+async def send_message_to_users(bot, m: Message):
+    msg = await m.reply_text(Presets.WAIT_MSG)
+    if m.from_user.id not in Config.SUDO_USERS:
+        await msg.edit_text(
+            Presets.NOT_AUTH_TEXT,
+            reply_markup=replay_markup_close
+        )
+        await m.delete()
+        return
+    fail_count = pass_count = int()
+    if (" " not in m.text) and ("send" in m.text) and (m.reply_to_message is not None):
+        await m.delete()
+        member = await map_chat_member(bot)
+        for chat_id in member:
+            try:
+                await bot.send_chat_action(chat_id, ChatAction.TYPING)
+            except Exception:
+                fail_count += 1
+                pass
+            else:
+                try:
+                    await bot.copy_message(
+                        chat_id=chat_id,
+                        from_chat_id=m.chat.id,
+                        message_id=m.reply_to_message_id,
+                        caption=m.caption
+                    )
+                    pass_count += 1
+                except FloodWait as e:
+                    await asyncio.sleep(e.value)
+                except Exception:
+                    pass
+        await msg.delete()
+        await m.reply_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
+                           reply_markup=replay_markup_close
+                           )
+    else:
+        await m.delete()
+        await msg.edit(Presets.INVALID_OPERATION)
+        await asyncio.sleep(10)
+        await msg.delete()
+
+
+# --------------------- Function to get the name-list of bot users ------------------- #
 @Client.on_message(filters.private & filters.command('users'))
 async def get_bot_users(bot, m: Message):
     msg = await m.reply_text(Presets.WAIT_MSG)
@@ -489,8 +534,9 @@ async def get_bot_users(bot, m: Message):
         return
     if (" " not in m.text) and ("users" in m.text):
         await m.delete()
-        user = string = str()
+        count = int()
         user_list = []
+        user = mention = result = str()
         user_ids = await map_chat_member(bot)
         for ids in user_ids:
             try:
@@ -499,38 +545,27 @@ async def get_bot_users(bot, m: Message):
                 pass
             else:
                 user = await bot.get_users(ids)
-                user_list.append(user.mention())
-        """Now we have the list of users & we need to send it to the user by 50 users per message"""
-        for x in user_list:
-            string += string + x               # adding total string in order to calculate the total length
-        #
+                mention = user.mention()
+                user_list.append(mention)
         total_users = len(user_list)
-        string_length = len(string)
-        #
-        if string_length >= 4097:               # if the length is greater than 4096 then split the list
-            n = 0
-            o = 50
-            length = len(user_list)
-            div = round(length / 50)
-            new_list = []
-            for i in user_list:                     # split the list into 50 users per list
-                if user_list[n:o]:
-                    new_list.append(user_list[n:o])
-                n += 50
-                o += 50
-            await msg.edit_text(Presets.TOTAL_USERS.format(total_users), reply_markup=single_close_button)
-            for x in new_list:                      # send the list to the user
-                items = '\n'.join(x)
+        if total_users > 50:
+            new_list = [user_list[i:i + 50] for i in range(0, len(user_list), 50)]
+            for items in new_list:
+                for item in items:
+                    result = result + "\n" + "\n".join([item])
                 await m.reply_text(
-                    items,
+                    Presets.BOT_USERS.format(total_users, result),
+                    parse_mode=ParseMode.HTML,
                     disable_web_page_preview=True,
                     reply_markup=single_close_button
                 )
-        else:
-            items = '\n'.join(user_list)
+                result = str()
             await msg.delete()
-            await m.reply_text(
-                Presets.BOT_USERS.format(total_users, items),
+        else:
+            for item in user_list:
+                result = result + "\n" + "\n".join([item])
+            await msg.edit_text(
+                Presets.BOT_USERS.format(total_users, result),
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
                 reply_markup=single_close_button
@@ -538,7 +573,7 @@ async def get_bot_users(bot, m: Message):
     else:
         await m.delete()
         await msg.edit(Presets.INVALID_OPERATION)
-        await asyncio.sleep(15)
+        await asyncio.sleep(10)
         await msg.delete()
 
 
