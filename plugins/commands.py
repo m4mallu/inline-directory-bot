@@ -477,51 +477,6 @@ async def send_message_to_users(bot, m: Message):
 
 
 # --------------------- Function to get the name-list of bot users ------------------- #
-@Client.on_message(filters.private & filters.command('send'))
-async def send_message_to_users(bot, m: Message):
-    msg = await m.reply_text(Presets.WAIT_MSG)
-    if m.from_user.id not in Config.SUDO_USERS:
-        await msg.edit_text(
-            Presets.NOT_AUTH_TEXT,
-            reply_markup=replay_markup_close
-        )
-        await m.delete()
-        return
-    fail_count = pass_count = int()
-    if (" " not in m.text) and ("send" in m.text) and (m.reply_to_message is not None):
-        await m.delete()
-        member = await map_chat_member(bot)
-        for chat_id in member:
-            try:
-                await bot.send_chat_action(chat_id, ChatAction.TYPING)
-            except Exception:
-                fail_count += 1
-                pass
-            else:
-                try:
-                    await bot.copy_message(
-                        chat_id=chat_id,
-                        from_chat_id=m.chat.id,
-                        message_id=m.reply_to_message_id,
-                        caption=m.caption
-                    )
-                    pass_count += 1
-                except FloodWait as e:
-                    await asyncio.sleep(e.value)
-                except Exception:
-                    pass
-        await msg.delete()
-        await m.reply_text(Presets.BROADCAST_MSG.format(pass_count, fail_count),
-                           reply_markup=replay_markup_close
-                           )
-    else:
-        await m.delete()
-        await msg.edit(Presets.INVALID_OPERATION)
-        await asyncio.sleep(10)
-        await msg.delete()
-
-
-# --------------------- Function to get the name-list of bot users ------------------- #
 @Client.on_message(filters.private & filters.command('users'))
 async def get_bot_users(bot, m: Message):
     msg = await m.reply_text(Presets.WAIT_MSG)
