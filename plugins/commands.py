@@ -147,6 +147,10 @@ async def add_thumb(b, m: Message):
         try:
             img_url = upload_file(thumb_path)[0]
         except Exception:
+            try:
+                os.remove(thumb_path)
+            except Exception:
+                pass
             await msg.edit_text(Presets.URL_ERROR)
             await asyncio.sleep(5)
             await msg.delete()
